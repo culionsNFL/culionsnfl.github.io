@@ -1,0 +1,1428 @@
+<title>CU Lions NFL Wins League</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --paper:    #EDF2F6;
+    --surface:  #F9FBFD;
+    --raise:    #FFFFFF;
+    --ink:      #101A22;
+    --ink-2:    #45565F;
+    --muted:    #6C7C86;
+    --line:     #D2DEE6;
+    --hair:     #E2EAF0;
+    --accent:   #0B4A78;
+    --accent-soft: #E2EEF6;
+    --warm:     #A8501F;
+    --grid:     #E0E8EE;
+    /* Columbia blue, used as the banner ground rather than as an accent —
+       it is far too light to carry text or marks on a pale page. */
+    --band-1:   #BFDDEE;
+    --band-2:   #8AC4E2;
+    --band-ink: #08243B;
+    --band-sub: #2C5975;
+    --band-rule: rgba(8,36,59,0.16);
+    --scrim-strong: rgba(226,238,246,0.93);
+    --scrim-soft:   rgba(226,238,246,0.55);
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+
+    --f-display: "Oswald", "Haettenschweiler", "Arial Narrow", sans-serif;
+    --f-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper:   #0B1116;
+      --surface: #131A20;
+      --raise:   #18212A;
+      --ink:     #E6EDF2;
+      --ink-2:   #AFBFC9;
+      --muted:   #85959F;
+      --line:    #26313A;
+      --hair:    #1F2831;
+      --accent:  #6FB6E8;
+      --accent-soft: #14293A;
+      --warm:    #E08347;
+      --grid:    #222C34;
+      --band-1:   #123049;
+      --band-2:   #0A1E30;
+      --band-ink: #DCEBF5;
+      --band-sub: #8FB4CC;
+      --band-rule: rgba(220,235,245,0.18);
+      --scrim-strong: rgba(7,16,24,0.90);
+      --scrim-soft:   rgba(7,16,24,0.45);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper:   #0B1116;
+    --surface: #131A20;
+    --raise:   #18212A;
+    --ink:     #E6EDF2;
+    --ink-2:   #AFBFC9;
+    --muted:   #85959F;
+    --line:    #26313A;
+    --hair:    #1F2831;
+    --accent:  #6FB6E8;
+    --accent-soft: #14293A;
+    --warm:    #E08347;
+    --grid:    #222C34;
+    --band-1:   #123049;
+    --band-2:   #0A1E30;
+    --band-ink: #DCEBF5;
+    --band-sub: #8FB4CC;
+    --band-rule: rgba(220,235,245,0.18);
+    --scrim-strong: rgba(7,16,24,0.90);
+    --scrim-soft:   rgba(7,16,24,0.45);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 32px 20px 64px; }
+
+  /* ---------- banner ---------- */
+  .banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: linear-gradient(128deg, var(--band-1) 0%, var(--band-2) 100%);
+    color: var(--band-ink);
+    padding: 30px 28px 0;
+    isolation: isolate;
+  }
+  /* Chalked yard lines, angled across the ground — masked so they fade out
+     behind the centred type and stay put near the edges. */
+  .banner::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10%;
+    z-index: -1;
+    background: repeating-linear-gradient(
+      74deg,
+      transparent 0 46px,
+      var(--band-rule) 46px 47px,
+      transparent 47px 94px
+    );
+    opacity: .5;
+    -webkit-mask-image: radial-gradient(ellipse 62% 68% at 50% 48%, transparent 34%, #000 80%);
+    mask-image: radial-gradient(ellipse 62% 68% at 50% 48%, transparent 34%, #000 80%);
+  }
+  /* Photo ground. Sits under the scrim so the type stays readable whatever
+     the image is; hidden until an image is supplied. */
+  .banner-photo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center 38%;
+    background-repeat: no-repeat;
+  }
+  .banner-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* Strongest where the centred type sits, easing off at the edges. */
+    background: radial-gradient(ellipse 82% 92% at 50% 50%,
+      var(--scrim-strong) 0%,
+      var(--scrim-strong) 46%,
+      var(--scrim-soft) 100%);
+  }
+  .banner-body {
+    position: relative;
+    text-align: center;
+  }
+  .banner-body > div {
+    max-width: 60ch;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 11.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--band-sub);
+    margin: 2px 0 6px;
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(30px, 5.4vw, 46px);
+    line-height: 1.0;
+    letter-spacing: .005em;
+    text-transform: uppercase;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 .thin { font-weight: 400; color: var(--band-sub); display: block; }
+  .lede {
+    margin: 12px auto 0;
+    max-width: 54ch;
+    color: var(--band-sub);
+    font-size: 14.5px;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .meta {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 24px;
+    border-top: 1px solid var(--band-rule);
+  }
+  .meta > div {
+    flex: 1 1 150px;
+    padding: 12px 16px 14px;
+    text-align: center;
+    border-right: 1px solid var(--band-rule);
+  }
+  .meta > div:last-child { border-right: 0; }
+  .meta dt {
+    font-family: var(--f-display);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--band-sub);
+    margin: 0 0 3px;
+  }
+  .meta dd {
+    margin: 0;
+    font-family: var(--f-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--band-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .live { color: var(--band-ink); }
+  @media (max-width: 560px) {
+    .banner { padding: 22px 18px 0; }
+  }
+
+  /* ---------- section ---------- */
+  section { margin-top: 44px; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .sec-note { font-size: 13px; color: var(--muted); }
+
+  /* ---------- the story ----------
+     The editorial layer: one thesis sentence for the week, then the few
+     threads worth knowing. Beats carry a rule in the owner's colour rather
+     than a box, so this reads as a column and not as another card deck. */
+  #story-sec { margin-top: 34px; }
+  .standfirst {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(19px, 2.5vw, 23px);
+    line-height: 1.34;
+    letter-spacing: .005em;
+    color: var(--ink);
+    margin: 0 0 20px;
+    max-width: 46ch;
+    text-wrap: pretty;
+  }
+  /* Column count is set from the number of beats, so a row is never left
+     with one orphan sitting beside empty space. */
+  .beats {
+    display: grid;
+    grid-template-columns: repeat(var(--beat-cols, 2), minmax(0, 1fr));
+    gap: 18px 22px;
+  }
+  @media (max-width: 880px) { .beats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 580px) { .beats { grid-template-columns: 1fr; } }
+  .beat {
+    border-left: 3px solid var(--muted);
+    padding-left: 13px;
+  }
+  .beat-tag {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .beat p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.52;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  /* ---------- standings ---------- */
+  .cols {
+    display: grid;
+    grid-template-columns: 34px 1fr 74px;
+    gap: 12px;
+    padding: 0 14px 6px;
+    font-family: var(--f-display);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .cols span:last-child { text-align: right; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 34px 1fr 74px;
+    gap: 4px 12px;
+    align-items: start;
+    padding: 14px;
+    border-bottom: 1px solid var(--hair);
+    border-left: 3px solid transparent;
+  }
+  .row.me {
+    background: var(--surface);
+    border-left-color: var(--accent);
+  }
+  .rank {
+    font-family: var(--f-mono);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+  /* Podium: only the top three are lifted, so rank reads at a glance. */
+  .rank.podium {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .rank.podium.p1 {
+    background: var(--accent);
+    color: var(--raise);
+    border-color: var(--accent);
+  }
+  .rank.podium.p3 { opacity: .72; }
+
+  .move {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  .move.up { color: #0ca30c; }
+  .move.down { color: #d03b3b; }
+
+  /* Heat check: how the owner's last completed week compared with the league
+     average for that week. Glyph + word carry it, so it never relies on colour. */
+  .heat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--f-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .heat.hot  { color: #0b8a3e; }
+  .heat.cold { color: #c0392f; }
+  .heat b { font-family: var(--f-mono); font-weight: 600; letter-spacing: 0; }
+  .who { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex: 0 0 auto;
+    box-shadow: 0 0 0 2px var(--paper);
+  }
+  .row.me .dot { box-shadow: 0 0 0 2px var(--surface); }
+  .name {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 21px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  .pill {
+    font-family: var(--f-display);
+    font-size: 10px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    color: var(--warm);
+    border: 1px solid currentColor;
+  }
+  .pill.mine { color: var(--accent); }
+  .pts {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: right;
+    font-family: var(--f-mono);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.15;
+  }
+  .pts b {
+    display: block;
+    font-weight: 600;
+    font-size: 23px;
+    letter-spacing: -0.02em;
+  }
+  .pts span {
+    display: block;
+    margin-top: 2px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .pts span.gained { color: var(--accent); }
+
+  .trend {
+    grid-column: 2 / 4;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0 2px;
+  }
+  .trend .bar { flex: 1 1 auto; margin: 0; }
+
+  .bar {
+    grid-column: 2 / 4;
+    display: flex;
+    gap: 2px;
+    height: 9px;
+    margin: 8px 0 2px;
+    background: var(--track);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .bar .seg {
+    border-radius: 1px;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+  :root { --heat-hot: #0b8a3e; --heat-cold: #c0392f; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --heat-hot: #45c07a; --heat-cold: #ef6b5e; } }
+  :root[data-theme="dark"] { --heat-hot: #45c07a; --heat-cold: #ef6b5e; }
+  .heat.hot  { color: var(--heat-hot); }
+  .heat.cold { color: var(--heat-cold); }
+
+  :root { --track: #E1E9EF; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --track: #212A32; } }
+  :root[data-theme="dark"] { --track: #212A32; }
+
+  .teams {
+    grid-column: 2 / 4;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .chip {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 8px;
+    border: 1px solid var(--hair);
+    border-radius: 2px;
+    background: var(--raise);
+  }
+  .chip b {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: .07em;
+  }
+  .chip span {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .chip.hot { border-color: var(--accent); }
+
+  .whoami {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 3px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .whoami span.lbl {
+    font-family: var(--f-display);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 4px;
+  }
+  .whoami button {
+    font: inherit;
+    font-family: var(--f-display);
+    font-size: 12.5px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: var(--raise);
+    border: 1px solid var(--hair);
+    border-radius: 2px;
+    padding: 3px 9px;
+    cursor: pointer;
+  }
+  .whoami button:hover { border-color: var(--muted); color: var(--ink); }
+  .whoami button[aria-pressed="true"] {
+    color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .whoami button.clear { border-style: dashed; }
+
+  /* ---------- chart ---------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 18px;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+  .legend i { width: 11px; height: 3px; border-radius: 2px; display: block; }
+  .chart-scroll { overflow-x: auto; }
+  svg.chart { display: block; width: 100%; min-width: 520px; height: auto; }
+  svg.chart text { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+  svg.chart text.endlab { font-family: var(--f-display); font-size: 11px; letter-spacing: .04em; fill: var(--ink); text-transform: uppercase; }
+  .tip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--raise);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 10px;
+    font-size: 12.5px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.12);
+    min-width: 128px;
+    z-index: 5;
+  }
+  .tip h4 {
+    margin: 0 0 5px;
+    font-family: var(--f-display);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tip div { display: flex; align-items: center; gap: 7px; justify-content: space-between; }
+  .tip em { font-style: normal; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+  .tip i { width: 8px; height: 8px; border-radius: 50%; display: block; }
+  .tip b { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+  .chart-host { position: relative; }
+
+  details.table-view { margin-top: 14px; }
+  details.table-view summary {
+    cursor: pointer;
+    font-family: var(--f-display);
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 6px 0;
+  }
+  .tbl-scroll { overflow-x: auto; margin-top: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td {
+    padding: 6px 10px;
+    text-align: right;
+    font-family: var(--f-mono);
+    font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--hair);
+    white-space: nowrap;
+  }
+  th:first-child, td:first-child {
+    text-align: left;
+    font-family: var(--f-display);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  thead th {
+    font-family: var(--f-display);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.tot { font-weight: 600; color: var(--ink); }
+
+  /* ---------- slate ---------- */
+  .slate { display: grid; gap: 0; }
+  .game {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 14px;
+    padding: 11px 4px;
+    border-bottom: 1px solid var(--hair);
+    align-items: center;
+  }
+  .odds {
+    text-align: right;
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    line-height: 1.35;
+  }
+  .odds b { font-weight: 600; color: var(--ink); }
+  .odds span { display: block; font-size: 11.5px; color: var(--muted); }
+  .odds b.score { font-size: 14.5px; letter-spacing: .01em; }
+  .game.played .kick {
+    font-family: var(--f-display);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .side.won b { color: var(--ink); }
+  .side.lost b { color: var(--muted); font-weight: 400; }
+  .side.lost .dot { opacity: .45; }
+  .game:last-child { border-bottom: 0; }
+  .kick {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .tag {
+    font-family: var(--f-display);
+    font-size: 9.5px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--warm);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    padding: 1px 5px;
+    white-space: nowrap;
+  }
+  .vs { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .side { display: inline-flex; align-items: center; gap: 7px; }
+  .side b {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: .06em;
+  }
+  .side em {
+    font-style: normal;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .at { color: var(--muted); font-size: 12.5px; font-family: var(--f-mono); }
+  .story {
+    grid-column: 2 / -1;
+    margin-top: 5px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 74ch;
+  }
+
+  .note {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    font-size: 13.5px;
+    color: var(--ink-2);
+    border-radius: 0 2px 2px 0;
+  }
+  footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  footer code { font-family: var(--f-mono); font-size: 12px; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  @media (max-width: 560px) {
+    .row, .cols { grid-template-columns: 26px 1fr 62px; }
+    .name { font-size: 18px; }
+    .pts { font-size: 20px; }
+    .game { grid-template-columns: 1fr; gap: 4px; }
+    .odds { text-align: left; }
+    .odds span { display: inline; margin-left: 8px; }
+    .story { grid-column: 1 / -1; }
+  }
+</style>
+
+<script id="payload" type="application/json">
+{"PLACEHOLDER": true}
+</script>
+
+<div class="wrap">
+  <header class="banner">
+    <!-- Photo layer: a data: URI drops in here when Jon supplies the image. -->
+    <div class="banner-photo" id="banner-photo" hidden></div>
+
+    <div class="banner-body">
+      <div>
+        <p class="eyebrow" id="eyebrow">2026 NFL Regular Season</p>
+        <h1>CU Lions<span class="thin">NFL Wins League</span></h1>
+        <p class="lede">Eight owners, four teams each, all thirty-two franchises spoken for. One point per win, half for a tie. No trades, no waivers, nobody to blame but the guys you drafted.</p>
+      </div>
+    </div>
+
+    <dl class="meta" id="meta"></dl>
+  </header>
+
+  <section id="story-sec" hidden>
+    <div class="sec-head">
+      <h2>The story</h2>
+      <span class="sec-note" id="story-note"></span>
+    </div>
+    <p class="standfirst" id="standfirst"></p>
+    <div class="beats" id="beats"></div>
+  </section>
+
+  <section id="standings-sec">
+    <div class="sec-head">
+      <h2>Standings</h2>
+      <span class="sec-note" id="stand-note"></span>
+    </div>
+    <div class="whoami" id="whoami"></div>
+    <div class="cols"><span>#</span><span>Owner &amp; roster</span><span>Points</span></div>
+    <div id="standings"></div>
+  </section>
+
+  <section id="race-sec" hidden>
+    <div class="sec-head">
+      <h2>Points by week</h2>
+      <span class="sec-note">Cumulative, regular season</span>
+    </div>
+    <div class="card">
+      <div class="legend" id="legend"></div>
+      <div class="chart-host" id="chart-host">
+        <div class="chart-scroll"><svg class="chart" id="chart" viewBox="0 0 760 320" role="img" aria-label="Cumulative pick'em points by week for each owner"></svg></div>
+      </div>
+      <details class="table-view">
+        <summary>Week-by-week table</summary>
+        <div class="tbl-scroll" id="tbl"></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="results-sec" hidden>
+    <div class="sec-head">
+      <h2>Results</h2>
+      <span class="sec-note" id="results-note"></span>
+    </div>
+    <div class="slate" id="results"></div>
+  </section>
+
+  <section id="upnext-sec" hidden>
+    <div class="sec-head">
+      <h2 id="upnext-title">Up next</h2>
+      <span class="sec-note">Kickoffs ET · line and total</span>
+    </div>
+    <div class="slate" id="upnext"></div>
+    <p class="note" id="slate-note"></p>
+  </section>
+
+
+  <footer>
+    <p id="foot"></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var D = JSON.parse(document.getElementById("payload").textContent);
+  var SERIES = ["--s1","--s2","--s3","--s4","--s5","--s6","--s7","--s8"];
+
+  // Nobody is "you" until this viewer says so. The page is shared, so it has
+  // no idea who is reading it; each browser remembers its own pick locally.
+  var STORE_KEY = "pickem.me";
+  var ME = null;
+  try { ME = localStorage.getItem(STORE_KEY) || null; } catch (e) { ME = null; }
+
+  var TEAM = {
+    ARI:"Cardinals", ATL:"Falcons", BAL:"Ravens", BUF:"Bills", CAR:"Panthers",
+    CHI:"Bears", CIN:"Bengals", CLE:"Browns", DAL:"Cowboys", DEN:"Broncos",
+    DET:"Lions", GB:"Packers", HOU:"Texans", IND:"Colts", JAX:"Jaguars",
+    KC:"Chiefs", LA:"Rams", LAC:"Chargers", LV:"Raiders", MIA:"Dolphins",
+    MIN:"Vikings", NE:"Patriots", NO:"Saints", NYG:"Giants", NYJ:"Jets",
+    PHI:"Eagles", PIT:"Steelers", SEA:"Seahawks", SF:"49ers", TB:"Buccaneers",
+    TEN:"Titans", WAS:"Commanders"
+  };
+
+  // Owner order is the draft order; a colour belongs to an owner, not to a rank.
+  var OWNERS = Object.keys(D.rosters);
+  var COLOR = {};
+  OWNERS.forEach(function (o, i) { COLOR[o] = "var(" + SERIES[i % 8] + ")"; });
+
+  var ownerOf = {};
+  OWNERS.forEach(function (o) {
+    D.rosters[o].forEach(function (t) { ownerOf[t] = o; });
+  });
+
+  function pts(x) { return (Math.round(x * 10) % 10 === 0) ? String(Math.round(x)) : x.toFixed(1); }
+  function teamPts(t) { var r = D.teams[t]; return r.w + 0.5 * r.t; }
+  function recOf(t) {
+    var r = D.teams[t];
+    return r.t ? r.w + "-" + r.l + "-" + r.t : r.w + "-" + r.l;
+  }
+  function el(tag, cls, txt) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (txt != null) n.textContent = txt;
+    return n;
+  }
+
+  /* ---------------- header meta ---------------- */
+  var played = D.lastCompletedWeek;
+  // Weeks that are FINISHED. "played" can point at a week still in progress,
+  // which is fine for "this week's haul" but wrong for any trend line.
+  var TW = (D.completeWeeks != null) ? D.completeWeeks : played;
+  document.getElementById("eyebrow").textContent = D.season + " NFL Regular Season";
+
+  // Be honest about a week in progress rather than claiming it's complete.
+  var weekLabel;
+  if (!D.currentWeek) {
+    weekLabel = "Final — Week 18";
+  } else if (!D.curPlayed) {
+    weekLabel = "Week " + D.currentWeek + " up next";
+  } else {
+    weekLabel = "Week " + D.currentWeek + " · " + D.curPlayed + " of " + D.curTotal + " played";
+  }
+
+  var upd = new Date(D.updated);
+  var updLabel = isNaN(upd) ? D.updated : upd.toLocaleString(undefined, {
+    month: "short", day: "numeric", hour: "numeric", minute: "2-digit"
+  });
+
+  var totalDecided = 0;
+  Object.keys(D.teams).forEach(function (t) { totalDecided += teamPts(t); });
+
+  [["Season", weekLabel],
+   ["Games in the book", totalDecided + " of 272"],
+   ["Scoring", "Win 1 · Tie 0.5"],
+   ["Last refresh", updLabel]
+  ].forEach(function (pair, i) {
+    var d = document.createElement("div");
+    var dt = el("dt", null, pair[0]);
+    var dd = el("dd", i === 3 ? "live" : null, pair[1]);
+    d.appendChild(dt); d.appendChild(dd);
+    document.getElementById("meta").appendChild(d);
+  });
+
+  /* ---------------- the story ----------------
+     Written by hand each refresh and carried in the payload. The section
+     simply stays hidden when there is nothing worth saying yet. */
+  (function () {
+    var S = D.story;
+    if (!S || !S.lede) return;
+    document.getElementById("story-sec").hidden = false;
+    document.getElementById("standfirst").textContent = S.lede;
+    if (S.note) document.getElementById("story-note").textContent = S.note;
+
+    var host = document.getElementById("beats");
+    var n = (S.beats || []).length;
+    host.style.setProperty("--beat-cols", n % 3 === 0 ? 3 : n % 2 === 0 ? 2 : 3);
+
+    (S.beats || []).forEach(function (b) {
+      var beat = el("div", "beat");
+      var known = b.owner && COLOR[b.owner];
+      if (known) beat.style.borderLeftColor = COLOR[b.owner];
+
+      var tag = el("div", "beat-tag");
+      if (known) {
+        var dot = el("span", "dot");
+        dot.style.background = COLOR[b.owner];
+        tag.appendChild(dot);
+      }
+      tag.appendChild(document.createTextNode(b.tag || b.owner || ""));
+      beat.appendChild(tag);
+      beat.appendChild(el("p", null, b.text));
+      host.appendChild(beat);
+    });
+  })();
+
+  /* ---------------- standings ---------------- */
+  var table = OWNERS.map(function (o) {
+    return { owner: o, p: D.points[o], teams: D.rosters[o].slice() };
+  }).sort(function (a, b) {
+    return b.p - a.p || a.owner.localeCompare(b.owner);
+  });
+
+  var top = table[0].p;
+  var maxBar = Math.max(top, 1);
+  var rank = 0, prev = null;
+  table.forEach(function (r, i) {
+    if (prev === null || r.p !== prev) { rank = i + 1; prev = r.p; }
+    r.rank = rank;
+  });
+
+  document.getElementById("stand-note").textContent =
+    played === 0 ? "Nobody has done anything yet" : "Leader holds " + pts(top) + " points";
+
+  if (OWNERS.indexOf(ME) === -1) ME = null;
+
+  // Cumulative points per owner, week 0 to now — feeds the heat check,
+  // the movement arrows and the big chart below.
+  var cum = {};
+  OWNERS.forEach(function (o) {
+    var run = 0, arr = [0];
+    (D.weekly[o] || []).forEach(function (v) { run += v; arr.push(run); });
+    cum[o] = arr;
+  });
+
+  // Where everyone stood before the most recent completed week.
+  var prevRank = {};
+  if (TW >= 2) {
+    var pr = 0, pv = null;
+    OWNERS.map(function (o) { return { o: o, v: cum[o][TW - 1] }; })
+      .sort(function (a, b) { return b.v - a.v || a.o.localeCompare(b.o); })
+      .forEach(function (r, i) {
+        if (pv === null || r.v !== pv) { pr = i + 1; pv = r.v; }
+        prevRank[r.o] = pr;
+      });
+  }
+
+  var leaderTotal = Math.max.apply(null, OWNERS.map(function (o) { return cum[o][TW]; }));
+  if (!(leaderTotal > 0)) leaderTotal = 1;
+
+  // Heat check — last completed week against the league average for that week.
+  // Every game awards exactly one point somewhere, so the eight owners always
+  // split the week's games between them: the average is the honest break-even,
+  // and it self-corrects for bye weeks without any special casing.
+  var heat = {};
+  if (TW >= 1) {
+    var hauls = OWNERS.map(function (o) { return (D.weekly[o] || [])[TW - 1] || 0; });
+    var avg = hauls.reduce(function (a, b) { return a + b; }, 0) / OWNERS.length;
+    OWNERS.forEach(function (o, i) { heat[o] = { got: hauls[i], avg: avg, d: hauls[i] - avg }; });
+  }
+
+  function heatChip(owner) {
+    var h = heat[owner];
+    if (!h) return null;
+    // Half-point ties make exact equality too brittle; treat a quarter-point
+    // either side of the average as level.
+    var up = h.d > 0.25, down = h.d < -0.25;
+    var chip = el("span", "heat" + (up ? " hot" : down ? " cold" : ""));
+    chip.appendChild(document.createTextNode((up ? "▲ " : down ? "▼ " : "— ") +
+      (up ? "Up" : down ? "Down" : "Even")));
+    if (up || down) {
+      chip.appendChild(el("b", null, (h.d > 0 ? "+" : "−") + pts(Math.abs(h.d))));
+    }
+    chip.title = "Week " + TW + ": " + pts(h.got) + " point" + (h.got === 1 ? "" : "s") +
+                 " against a league average of " + pts(h.avg);
+    return chip;
+  }
+
+
+  var host = document.getElementById("standings");
+
+  function renderStandings() {
+  host.innerHTML = "";
+  table.forEach(function (r) {
+    var row = el("div", "row" + (r.owner === ME ? " me" : ""));
+
+    // Podium only where the rank actually distinguishes someone — badging a
+    // seven-way tie for second is worse than no badge at all.
+    var shared = table.filter(function (x) { return x.rank === r.rank; }).length;
+    var rankCls = "rank";
+    if (played > 0 && r.rank <= 3 && shared <= 2) rankCls += " podium p" + r.rank;
+    row.appendChild(el("div", rankCls, played === 0 ? "–" : String(r.rank).padStart(2, "0")));
+
+    var who = el("div", "who");
+    var dot = el("span", "dot");
+    dot.style.background = COLOR[r.owner];
+    who.appendChild(dot);
+    who.appendChild(el("span", "name", r.owner));
+    if (r.p === top && played > 0) who.appendChild(el("span", "pill", "Leader"));
+    if (r.owner === ME) who.appendChild(el("span", "pill mine", "You"));
+
+    // How the week actually went for them, relative to everyone else.
+    var chip = heatChip(r.owner);
+    if (chip) who.appendChild(chip);
+
+    // Rank movement, shown only when someone actually moved — in an eight-man
+    // pool most weeks change nothing, and a row of dashes is just noise.
+    if (TW >= 2 && prevRank[r.owner]) {
+      var delta = prevRank[r.owner] - r.rank;
+      if (delta !== 0) {
+        var mv = el("span", "move" + (delta > 0 ? " up" : " down"),
+          (delta > 0 ? "▲" : "▼") + Math.abs(delta));
+        mv.title = "Was " + prevRank[r.owner] + " last week";
+        who.appendChild(mv);
+      }
+    }
+    row.appendChild(who);
+
+    var ptsCell = el("div", "pts");
+    ptsCell.appendChild(el("b", null, pts(r.p)));
+    if (played >= 1) {
+      var haul = (D.weekly[r.owner] || [])[played - 1] || 0;
+      ptsCell.appendChild(el("span", haul > 0 ? "gained" : null,
+        (haul > 0 ? "+" + pts(haul) : "0") + " in W" + played));
+    }
+    row.appendChild(ptsCell);
+
+    // Bar length is the owner's total against the leader's; the four
+    // internal divisions are the four teams' shares of it.
+    if (played > 0) {
+      var trend = el("div", "trend");
+      var bar = el("div", "bar");
+      r.teams.slice().sort(function (a, b) { return teamPts(b) - teamPts(a); })
+        .forEach(function (t) {
+          var seg = el("div", "seg");
+          var frac = teamPts(t) / maxBar;
+          seg.style.width = "max(0px, calc(" + (frac * 100).toFixed(2) + "% - 1.5px))";
+          seg.style.background = COLOR[r.owner];
+          seg.title = TEAM[t] + " — " + pts(teamPts(t)) + " pt";
+          bar.appendChild(seg);
+        });
+      trend.appendChild(bar);
+      row.appendChild(trend);
+    }
+
+    var chips = el("div", "teams");
+    r.teams.slice().sort(function (a, b) { return teamPts(b) - teamPts(a); }).forEach(function (t) {
+      var c = el("div", "chip" + (teamPts(t) === Math.max.apply(null, r.teams.map(teamPts)) && played > 0 ? " hot" : ""));
+      c.appendChild(el("b", null, t));
+      c.appendChild(el("span", null, recOf(t)));
+      c.title = TEAM[t];
+      chips.appendChild(c);
+    });
+    row.appendChild(chips);
+
+    host.appendChild(row);
+  });
+  }
+
+  // Each viewer marks their own row; the choice lives in their browser only.
+  function renderPicker() {
+    var bar = document.getElementById("whoami");
+    bar.innerHTML = "";
+    bar.appendChild(el("span", "lbl", ME ? "Your row" : "Which one are you?"));
+
+    OWNERS.slice().sort().forEach(function (o) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = o;
+      b.setAttribute("aria-pressed", o === ME ? "true" : "false");
+      b.addEventListener("click", function () { pick(o === ME ? null : o); });
+      bar.appendChild(b);
+    });
+
+    if (ME) {
+      var c = document.createElement("button");
+      c.type = "button";
+      c.className = "clear";
+      c.textContent = "Not me";
+      c.addEventListener("click", function () { pick(null); });
+      bar.appendChild(c);
+    }
+  }
+
+  function pick(who) {
+    ME = who;
+    try {
+      if (who) { localStorage.setItem(STORE_KEY, who); }
+      else { localStorage.removeItem(STORE_KEY); }
+    } catch (e) { /* private window or blocked storage — highlight is just not remembered */ }
+    renderPicker();
+    renderStandings();
+  }
+
+  renderPicker();
+  renderStandings();
+
+  /* ---------------- cumulative chart ---------------- */
+  if (TW >= 2) {
+    document.getElementById("race-sec").hidden = false;
+
+    var lg = document.getElementById("legend");
+    table.forEach(function (r) {
+      var s = el("span");
+      var sw = document.createElement("i");
+      sw.style.background = COLOR[r.owner];
+      s.appendChild(sw);
+      s.appendChild(document.createTextNode(r.owner));
+      lg.appendChild(s);
+    });
+
+    var W = 760, H = 320, L = 40, R = 128, T = 18, B = 38;
+    var maxY = 0;
+    OWNERS.forEach(function (o) { maxY = Math.max(maxY, cum[o][TW]); });
+    var step = maxY <= 12 ? 2 : maxY <= 30 ? 5 : 10;
+    var topY = Math.max(step, Math.ceil(maxY / step) * step);
+
+    var X = function (w) { return L + (w / TW) * (W - L - R); };
+    var Y = function (v) { return H - B - (v / topY) * (H - T - B); };
+
+    var svg = document.getElementById("chart");
+    var NS = "http://www.w3.org/2000/svg";
+    function mk(t, a) {
+      var n = document.createElementNS(NS, t);
+      for (var k in a) n.setAttribute(k, a[k]);
+      return n;
+    }
+
+    for (var v = 0; v <= topY; v += step) {
+      svg.appendChild(mk("line", {
+        x1: L, x2: W - R, y1: Y(v), y2: Y(v),
+        stroke: "var(--grid)", "stroke-width": 1
+      }));
+      var yl = mk("text", { x: L - 8, y: Y(v) + 3.5, "text-anchor": "end" });
+      yl.textContent = v;
+      svg.appendChild(yl);
+    }
+
+    var tickEvery = TW > 12 ? 3 : TW > 6 ? 2 : 1;
+    for (var w = 0; w <= TW; w++) {
+      if (w % tickEvery !== 0 && w !== TW) continue;
+      var xl = mk("text", { x: X(w), y: H - B + 17, "text-anchor": "middle" });
+      xl.textContent = w === 0 ? "0" : w;
+      svg.appendChild(xl);
+    }
+    var ax = mk("text", { x: (L + W - R) / 2, y: H - 5, "text-anchor": "middle" });
+    ax.textContent = "WEEK";
+    ax.setAttribute("letter-spacing", "1.5");
+    svg.appendChild(ax);
+
+    svg.appendChild(mk("line", {
+      x1: L, x2: W - R, y1: Y(0), y2: Y(0),
+      stroke: "var(--line)", "stroke-width": 1
+    }));
+
+    OWNERS.forEach(function (o) {
+      var d = cum[o].slice(0, TW + 1).map(function (val, i) { return (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(val).toFixed(1); }).join(" ");
+      svg.appendChild(mk("path", {
+        d: d, fill: "none", stroke: COLOR[o], "stroke-width": 2,
+        "stroke-linejoin": "round", "stroke-linecap": "round"
+      }));
+    });
+
+    // Endpoint markers + direct labels, nudged apart so nothing collides.
+    var ends = OWNERS.map(function (o) {
+      return { owner: o, v: cum[o][TW], y: Y(cum[o][TW]) };
+    }).sort(function (a, b) { return a.y - b.y; });
+
+    var MIN = 15;
+    for (var i = 1; i < ends.length; i++) {
+      if (ends[i].y - ends[i - 1].y < MIN) ends[i].y = ends[i - 1].y + MIN;
+    }
+    var overflow = ends[ends.length - 1].y - (H - B);
+    if (overflow > 0) ends.forEach(function (e) { e.y -= overflow; });
+
+    ends.forEach(function (e) {
+      svg.appendChild(mk("circle", {
+        cx: X(TW), cy: Y(e.v), r: 4,
+        fill: COLOR[e.owner], stroke: "var(--surface)", "stroke-width": 2
+      }));
+      svg.appendChild(mk("line", {
+        x1: X(TW) + 6, x2: W - R + 14, y1: Y(e.v), y2: e.y,
+        stroke: COLOR[e.owner], "stroke-width": 1, opacity: 0.45
+      }));
+      var lab = mk("text", { x: W - R + 18, y: e.y + 4, class: "endlab" });
+      lab.textContent = e.owner;
+      svg.appendChild(lab);
+      var val = mk("text", { x: W - 2, y: e.y + 4, "text-anchor": "end" });
+      val.textContent = pts(e.v);
+      svg.appendChild(val);
+    });
+
+    // Hover: crosshair + one tooltip listing every owner at that week.
+    var cross = mk("line", {
+      y1: T, y2: H - B, stroke: "var(--ink-2)", "stroke-width": 1,
+      opacity: 0, "stroke-dasharray": "3 3"
+    });
+    svg.appendChild(cross);
+
+    var hit = mk("rect", { x: L, y: T, width: W - L - R, height: H - T - B, fill: "transparent" });
+    svg.appendChild(hit);
+
+    var tip = el("div", "tip");
+    tip.style.display = "none";
+    document.getElementById("chart-host").appendChild(tip);
+
+    function show(evt) {
+      var box = svg.getBoundingClientRect();
+      var scale = (W) / box.width;
+      var px = (evt.clientX - box.left) * scale;
+      var wk = Math.round(((px - L) / (W - L - R)) * TW);
+      wk = Math.max(0, Math.min(TW, wk));
+
+      cross.setAttribute("x1", X(wk));
+      cross.setAttribute("x2", X(wk));
+      cross.setAttribute("opacity", 0.4);
+
+      tip.innerHTML = "";
+      tip.appendChild(el("h4", null, wk === 0 ? "Before Week 1" : "Through Week " + wk));
+      OWNERS.map(function (o) { return { o: o, v: cum[o][wk] }; })
+        .sort(function (a, b) { return b.v - a.v || a.o.localeCompare(b.o); })
+        .forEach(function (r) {
+          var line = el("div");
+          var lft = el("em");
+          var sw = document.createElement("i");
+          sw.style.background = COLOR[r.o];
+          lft.appendChild(sw);
+          lft.appendChild(document.createTextNode(r.o));
+          line.appendChild(lft);
+          line.appendChild(el("b", null, pts(r.v)));
+          tip.appendChild(line);
+        });
+
+      tip.style.display = "block";
+      var hostBox = document.getElementById("chart-host").getBoundingClientRect();
+      var lx = evt.clientX - hostBox.left + 14;
+      if (lx + tip.offsetWidth > hostBox.width) lx = evt.clientX - hostBox.left - tip.offsetWidth - 14;
+      tip.style.left = Math.max(0, lx) + "px";
+      tip.style.top = Math.min(hostBox.height - tip.offsetHeight, Math.max(0, evt.clientY - hostBox.top - 20)) + "px";
+    }
+    function hide() {
+      cross.setAttribute("opacity", 0);
+      tip.style.display = "none";
+    }
+    hit.addEventListener("mousemove", show);
+    hit.addEventListener("mouseleave", hide);
+    hit.addEventListener("touchmove", function (e) {
+      if (e.touches[0]) { show(e.touches[0]); }
+    }, { passive: true });
+
+    /* table view (relief for the light-mode contrast warning) */
+    var t = el("table");
+    var thead = el("thead"), hr = el("tr");
+    hr.appendChild(el("th", null, "Owner"));
+    for (var k = 1; k <= TW; k++) hr.appendChild(el("th", null, "W" + k));
+    hr.appendChild(el("th", null, "Total"));
+    thead.appendChild(hr); t.appendChild(thead);
+    var tb = el("tbody");
+    table.forEach(function (r) {
+      var tr = el("tr");
+      tr.appendChild(el("td", null, r.owner));
+      (D.weekly[r.owner] || []).slice(0, TW).forEach(function (v) { tr.appendChild(el("td", null, pts(v))); });
+      tr.appendChild(el("td", "tot", pts(r.p)));
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb);
+    document.getElementById("tbl").appendChild(t);
+  }
+
+  /* ---------------- results, then what's next ---------------- */
+  (function () {
+    var games = (D.games || []).slice();
+    if (!games.length) return;
+
+    var DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    var MONS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    function kickLabel(s) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/.exec(s || "");
+      if (!m) return s || "TBD";
+      var dt = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+      var h = +m[4], ap = h >= 12 ? "PM" : "AM";
+      var h12 = h % 12 === 0 ? 12 : h % 12;
+      return DAYS[dt.getUTCDay()] + " " + MONS[dt.getUTCMonth()] + " " + (+m[3]) +
+             " · " + h12 + ":" + m[5] + " " + ap;
+    }
+
+    var BL = D.blurbs || {};
+    function blurbFor(g) { return BL[g.wk + ":" + g.away + "@" + g.home]; }
+
+    function gameRow(g, showWeek) {
+      var mine = ownerOf[g.home] === ownerOf[g.away];
+      var winner = g.done ? (g.hs > g.as ? g.home : g.as > g.hs ? g.away : null) : null;
+
+      var row = el("div", "game" + (g.done ? " played" : ""));
+      row.appendChild(el("div", "kick",
+        g.done ? (showWeek ? "W" + g.wk + " · Final" : "Final") : kickLabel(g.kick)));
+
+      var vs = el("div", "vs");
+      [g.away, g.home].forEach(function (t, idx) {
+        if (idx === 1) vs.appendChild(el("span", "at", "at"));
+        var side = el("span", "side" + (winner === t ? " won" : g.done ? " lost" : ""));
+        var dot = el("span", "dot");
+        dot.style.background = COLOR[ownerOf[t]];
+        side.appendChild(dot);
+        side.appendChild(el("b", null, TEAM[t]));
+        side.appendChild(el("em", null, ownerOf[t]));
+        vs.appendChild(side);
+      });
+      if (mine) vs.appendChild(el("span", "tag", "Both " + ownerOf[g.home] + "'s"));
+      row.appendChild(vs);
+
+      var odds = el("div", "odds");
+      if (g.done) {
+        // Final score, away first to match the "X at Y" reading above.
+        odds.appendChild(el("b", "score", g.as + "–" + g.hs));
+        odds.appendChild(el("span", null,
+          winner ? ownerOf[winner] + " +1" : "Tie · both +0.5"));
+      } else {
+        // spread is quoted from the home team's side: positive means home is favoured.
+        if (typeof g.spread === "number") {
+          var favTeam = g.spread > 0 ? g.home : g.away;
+          var margin = Math.abs(g.spread);
+          odds.appendChild(el("b", null,
+            margin === 0 ? "Pick 'em" : favTeam + " −" + (margin % 1 ? margin.toFixed(1) : margin)));
+        } else {
+          odds.appendChild(el("b", null, "No line"));
+        }
+        if (typeof g.total === "number") {
+          odds.appendChild(el("span", null, "O/U " + (g.total % 1 ? g.total.toFixed(1) : g.total)));
+        }
+      }
+      row.appendChild(odds);
+
+      var b = blurbFor(g);
+      if (b) row.appendChild(el("p", "story", b));
+      return row;
+    }
+
+    // ---- played: newest first, so the freshest result is at the top ----
+    var done = games.filter(function (g) { return g.done; })
+      .sort(function (a, b) { return String(b.kick).localeCompare(String(a.kick)); });
+
+    if (done.length) {
+      document.getElementById("results-sec").hidden = false;
+      var wks = {};
+      done.forEach(function (g) { wks[g.wk] = 1; });
+      var wkList = Object.keys(wks).sort();
+      var multi = wkList.length > 1;
+      document.getElementById("results-note").textContent =
+        (multi ? "Weeks " + wkList[0] + "–" + wkList[wkList.length - 1] : "Week " + wkList[0]) +
+        " · " + done.length + (done.length === 1 ? " game" : " games") + " · newest first";
+      var rHost = document.getElementById("results");
+      done.forEach(function (g) { rHost.appendChild(gameRow(g, multi)); });
+    }
+
+    // ---- still to play ----
+    var todo = games.filter(function (g) { return !g.done; })
+      .sort(function (a, b) { return String(a.kick).localeCompare(String(b.kick)); });
+
+    if (todo.length) {
+      document.getElementById("upnext-sec").hidden = false;
+      document.getElementById("upnext-title").textContent =
+        "Week " + todo[0].wk + " — still to play";
+      var uHost = document.getElementById("upnext");
+      todo.forEach(function (g) { uHost.appendChild(gameRow(g, false)); });
+
+      // A game between two of the same owner's teams is a point banked
+      // whoever wins — worth calling out while it is still ahead of us.
+      var locks = todo.filter(function (g) { return ownerOf[g.home] === ownerOf[g.away]; });
+      var note = document.getElementById("slate-note");
+      if (locks.length) {
+        var byOwner = {};
+        locks.forEach(function (g) {
+          var o = ownerOf[g.home];
+          (byOwner[o] = byOwner[o] || []).push(TEAM[g.away] + "–" + TEAM[g.home]);
+        });
+        note.textContent = "Every franchise is drafted, so most games are owner against owner — but " +
+          Object.keys(byOwner).map(function (o) {
+            return o + " owns both sides of " + byOwner[o].join(" and ");
+          }).join(", and ") + " — " +
+          (locks.length === 1 ? "one point" : locks.length + " points") +
+          " banked, and not a single bragging right earned.";
+      } else {
+        note.textContent = "Every franchise is drafted, so every game left this week is one owner against another. Pick your enemies accordingly.";
+      }
+    }
+
+    /* Which section leads depends on when you're reading, not on when this
+       page was last built. Sunday through Wednesday the scores are the news;
+       by Thursday everyone has moved on to the next slate. The viewer's own
+       clock decides, so the order stays right between refreshes. */
+    function etToDate(s) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/.exec(s || "");
+      if (!m) return null;
+      var mo = +m[2];
+      var off = (mo >= 3 && mo <= 10) ? 4 : 5;   // ET offset, near enough
+      return new Date(Date.UTC(+m[1], mo - 1, +m[3], +m[4] + off, +m[5]));
+    }
+
+    var lastEnd = null;
+    done.forEach(function (g) {
+      var d = etToDate(g.kick);
+      if (!d) return;
+      d = new Date(d.getTime() + 3.4 * 3600 * 1000);   // roughly when it ended
+      if (!lastEnd || d > lastEnd) lastEnd = d;
+    });
+
+    var FRESH = 48 * 3600 * 1000;
+    var resultsLead = !!lastEnd && (Date.now() - lastEnd.getTime()) < FRESH;
+
+    var resSec = document.getElementById("results-sec");
+    var upSec = document.getElementById("upnext-sec");
+    if (!resultsLead && done.length && todo.length) {
+      resSec.parentNode.insertBefore(upSec, resSec);
+      document.getElementById("results-note").textContent += " · final";
+    }
+  })();
+
+  document.getElementById("foot").textContent =
+    "Records computed from finished " + D.season + " regular-season games (nflverse play-by-play schedule data), " +
+    "checked against league totals before publishing: " + D.checks.wins + " wins, " +
+    D.checks.losses + " losses, " + D.checks.ties + " ties across " + D.checks.teams +
+    " teams. Point spreads and totals come from the same dataset's closing market lines. " +
+    (D.refreshNote || "Refreshed on request through the season") + "; playoff games do not count.";
+})();
+</script>
