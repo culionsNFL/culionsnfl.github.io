@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CU Lions NFL Wins League">
 <meta name="twitter:description" content="Week 4, 15 of 16 played — Mark leads on 13. Mark 13, Jon 9, Patrick 9, Brian 8, Bill 7, Harrison 7, Anthony 6, Zach 4.">
 <meta name="twitter:image" content="https://culionsnfl.github.io/preview.png">
-<!-- built 2026-10-05T13:11:10Z -->
+<!-- built 2026-10-05T21:14:14Z -->
 </head>
 <body>
 <title>CU Lions NFL Wins League</title>
@@ -231,6 +231,14 @@
     font-size: 14px;
     font-weight: 500;
     color: var(--band-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .meta-sub {
+    margin: 3px 0 0;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: .02em;
+    color: var(--band-sub);
     font-variant-numeric: tabular-nums;
   }
   .live { color: var(--band-ink); }
@@ -1293,7 +1301,7 @@
    "qbHome": "Tyler Shough",
    "spread": 1.5,
    "stadium": "Caesars Superdome",
-   "total": 47.5,
+   "total": 48.5,
    "wk": 4
   }
  ],
@@ -1548,7 +1556,7 @@
    "w": 1
   }
  },
- "updated": "2026-10-05T13:11:10Z",
+ "updated": "2026-10-05T21:14:14Z",
  "weekly": {
   "Anthony": [
    3.0,
@@ -1748,15 +1756,18 @@
   var totalDecided = 0;
   Object.keys(D.teams).forEach(function (t) { totalDecided += teamPts(t); });
 
-  [["Season", weekLabel],
-   ["Games in the book", totalDecided + " of 272"],
-   ["Scoring", "Win 1 · Tie 0.5"],
-   ["Last refresh", updLabel]
+  var seasonPct = Math.round((totalDecided / 272) * 100);
+
+  [["Season", weekLabel, null],
+   ["Games in the book", totalDecided + " of 272", seasonPct + "% of the season"],
+   ["Scoring", "Win 1 · Tie 0.5", null],
+   ["Last refresh", updLabel, null]
   ].forEach(function (pair, i) {
     var d = document.createElement("div");
-    var dt = el("dt", null, pair[0]);
+    d.appendChild(el("dt", null, pair[0]));
     var dd = el("dd", i === 3 ? "live" : null, pair[1]);
-    d.appendChild(dt); d.appendChild(dd);
+    d.appendChild(dd);
+    if (pair[2]) d.appendChild(el("p", "meta-sub", pair[2]));
     document.getElementById("meta").appendChild(d);
   });
 
@@ -1808,7 +1819,10 @@
   });
 
   document.getElementById("stand-note").textContent =
-    played === 0 ? "Nobody has done anything yet" : "Leader holds " + pts(top) + " points";
+    played === 0
+      ? "Nobody has done anything yet"
+      : "Leader holds " + pts(top) + " points" +
+        (TW >= 1 ? " · chips compare Week " + TW + " with the league average" : "");
 
   if (OWNERS.indexOf(ME) === -1) ME = null;
 
@@ -1854,11 +1868,13 @@
     // either side of the average as level.
     var up = h.d > 0.25, down = h.d < -0.25;
     var chip = el("span", "heat" + (up ? " hot" : down ? " cold" : ""));
-    chip.appendChild(document.createTextNode((up ? "▲ " : down ? "▼ " : "— ") +
-      (up ? "Up" : down ? "Down" : "Even")));
+    chip.appendChild(document.createTextNode(up ? "▲ " : down ? "▼ " : "— "));
     if (up || down) {
       chip.appendChild(el("b", null, (h.d > 0 ? "+" : "−") + pts(Math.abs(h.d))));
+    } else {
+      chip.appendChild(el("b", null, "0"));
     }
+    chip.appendChild(document.createTextNode(" vs pace · W" + TW));
     chip.title = "Week " + TW + ": " + pts(h.got) + " point" + (h.got === 1 ? "" : "s") +
                  " against a league average of " + pts(h.avg);
     return chip;
@@ -1896,8 +1912,9 @@
     if (TW >= 2 && prevRank[r.owner]) {
       var delta = prevRank[r.owner] - r.rank;
       if (delta !== 0) {
+        var n = Math.abs(delta);
         var mv = el("span", "move" + (delta > 0 ? " up" : " down"),
-          (delta > 0 ? "▲" : "▼") + Math.abs(delta));
+          (delta > 0 ? "▲" : "▼") + n + (n === 1 ? " place" : " places"));
         mv.title = "Was " + prevRank[r.owner] + " last week";
         who.appendChild(mv);
       }
@@ -1984,8 +2001,16 @@
   renderStandings();
 
   /* ---------------- cumulative chart ---------------- */
-  if (TW >= 2) {
+  // The chart plots through the week in progress as well, because a half-week
+  // of movement is the most interesting thing on a Sunday. The partial leg is
+  // drawn dashed so nobody reads it as a finished week.
+  var PW = played, partial = PW > TW;
+  if (PW >= 2) {
     document.getElementById("race-sec").hidden = false;
+    if (partial) {
+      document.querySelector("#race-sec .sec-note").textContent =
+        "Cumulative · Week " + PW + " still in progress";
+    }
 
     var lg = document.getElementById("legend");
     table.forEach(function (r) {
@@ -1999,11 +2024,11 @@
 
     var W = 760, H = 320, L = 40, R = 128, T = 18, B = 38;
     var maxY = 0;
-    OWNERS.forEach(function (o) { maxY = Math.max(maxY, cum[o][TW]); });
+    OWNERS.forEach(function (o) { maxY = Math.max(maxY, cum[o][PW]); });
     var step = maxY <= 12 ? 2 : maxY <= 30 ? 5 : 10;
     var topY = Math.max(step, Math.ceil(maxY / step) * step);
 
-    var X = function (w) { return L + (w / TW) * (W - L - R); };
+    var X = function (w) { return L + (w / PW) * (W - L - R); };
     var Y = function (v) { return H - B - (v / topY) * (H - T - B); };
 
     var svg = document.getElementById("chart");
@@ -2024,9 +2049,9 @@
       svg.appendChild(yl);
     }
 
-    var tickEvery = TW > 12 ? 3 : TW > 6 ? 2 : 1;
-    for (var w = 0; w <= TW; w++) {
-      if (w % tickEvery !== 0 && w !== TW) continue;
+    var tickEvery = PW > 12 ? 3 : PW > 6 ? 2 : 1;
+    for (var w = 0; w <= PW; w++) {
+      if (w % tickEvery !== 0 && w !== PW) continue;
       var xl = mk("text", { x: X(w), y: H - B + 17, "text-anchor": "middle" });
       xl.textContent = w === 0 ? "0" : w;
       svg.appendChild(xl);
@@ -2042,16 +2067,26 @@
     }));
 
     OWNERS.forEach(function (o) {
-      var d = cum[o].slice(0, TW + 1).map(function (val, i) { return (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(val).toFixed(1); }).join(" ");
+      function leg(from, to) {
+        return cum[o].slice(from, to + 1).map(function (val, i) {
+          return (i ? "L" : "M") + X(from + i).toFixed(1) + " " + Y(val).toFixed(1);
+        }).join(" ");
+      }
       svg.appendChild(mk("path", {
-        d: d, fill: "none", stroke: COLOR[o], "stroke-width": 2,
+        d: leg(0, TW), fill: "none", stroke: COLOR[o], "stroke-width": 2,
         "stroke-linejoin": "round", "stroke-linecap": "round"
       }));
+      if (partial) {
+        svg.appendChild(mk("path", {
+          d: leg(TW, PW), fill: "none", stroke: COLOR[o], "stroke-width": 2,
+          "stroke-dasharray": "4 3", "stroke-linecap": "round", opacity: 0.85
+        }));
+      }
     });
 
     // Endpoint markers + direct labels, nudged apart so nothing collides.
     var ends = OWNERS.map(function (o) {
-      return { owner: o, v: cum[o][TW], y: Y(cum[o][TW]) };
+      return { owner: o, v: cum[o][PW], y: Y(cum[o][PW]) };
     }).sort(function (a, b) { return a.y - b.y; });
 
     var MIN = 15;
@@ -2063,11 +2098,11 @@
 
     ends.forEach(function (e) {
       svg.appendChild(mk("circle", {
-        cx: X(TW), cy: Y(e.v), r: 4,
+        cx: X(PW), cy: Y(e.v), r: 4,
         fill: COLOR[e.owner], stroke: "var(--surface)", "stroke-width": 2
       }));
       svg.appendChild(mk("line", {
-        x1: X(TW) + 6, x2: W - R + 14, y1: Y(e.v), y2: e.y,
+        x1: X(PW) + 6, x2: W - R + 14, y1: Y(e.v), y2: e.y,
         stroke: COLOR[e.owner], "stroke-width": 1, opacity: 0.45
       }));
       var lab = mk("text", { x: W - R + 18, y: e.y + 4, class: "endlab" });
@@ -2096,15 +2131,16 @@
       var box = svg.getBoundingClientRect();
       var scale = (W) / box.width;
       var px = (evt.clientX - box.left) * scale;
-      var wk = Math.round(((px - L) / (W - L - R)) * TW);
-      wk = Math.max(0, Math.min(TW, wk));
+      var wk = Math.round(((px - L) / (W - L - R)) * PW);
+      wk = Math.max(0, Math.min(PW, wk));
 
       cross.setAttribute("x1", X(wk));
       cross.setAttribute("x2", X(wk));
       cross.setAttribute("opacity", 0.4);
 
       tip.innerHTML = "";
-      tip.appendChild(el("h4", null, wk === 0 ? "Before Week 1" : "Through Week " + wk));
+      tip.appendChild(el("h4", null, wk === 0 ? "Before Week 1"
+        : "Through Week " + wk + (partial && wk === PW ? " (so far)" : "")));
       OWNERS.map(function (o) { return { o: o, v: cum[o][wk] }; })
         .sort(function (a, b) { return b.v - a.v || a.o.localeCompare(b.o); })
         .forEach(function (r) {
@@ -2140,14 +2176,14 @@
     var t = el("table");
     var thead = el("thead"), hr = el("tr");
     hr.appendChild(el("th", null, "Owner"));
-    for (var k = 1; k <= TW; k++) hr.appendChild(el("th", null, "W" + k));
+    for (var k = 1; k <= PW; k++) hr.appendChild(el("th", null, "W" + k + (partial && k === PW ? "*" : "")));
     hr.appendChild(el("th", null, "Total"));
     thead.appendChild(hr); t.appendChild(thead);
     var tb = el("tbody");
     table.forEach(function (r) {
       var tr = el("tr");
       tr.appendChild(el("td", null, r.owner));
-      (D.weekly[r.owner] || []).slice(0, TW).forEach(function (v) { tr.appendChild(el("td", null, pts(v))); });
+      (D.weekly[r.owner] || []).slice(0, PW).forEach(function (v) { tr.appendChild(el("td", null, pts(v))); });
       tr.appendChild(el("td", "tot", pts(r.p)));
       tb.appendChild(tr);
     });
