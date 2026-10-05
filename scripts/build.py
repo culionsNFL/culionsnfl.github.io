@@ -24,12 +24,64 @@ HEAD = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Standings, results and weekly storylines for the CU Lions NFL Wins League.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>%F0%9F%8F%88</text></svg>">
 <meta http-equiv="Cache-Control" content="no-cache">
 """
 TAIL = "\n</body>\n</html>\n"
+
+SITE = "https://culionsnfl.github.io"
+
+
+def esc(s):
+    """Escape for an HTML attribute."""
+    return (s.replace("&", "&amp;").replace('"', "&quot;")
+             .replace("<", "&lt;").replace(">", "&gt;"))
+
+
+def share_tags(payload):
+    """Link-preview tags. The image is fixed; the description is rebuilt every
+    time, so a link pasted into a group chat carries the current standings."""
+    pts = payload["points"]
+    order = sorted(pts.items(), key=lambda kv: (-kv[1], kv[0]))
+
+    def num(v):
+        return str(int(v)) if float(v).is_integer() else ("%.1f" % v)
+
+    lead_val = order[0][1]
+    leaders = [o for o, v in order if v == lead_val]
+    if len(leaders) == 1:
+        head = "%s leads on %s" % (leaders[0], num(lead_val))
+    else:
+        head = "%s tied on %s" % (" and ".join(leaders), num(lead_val))
+
+    wk = payload.get("currentWeek")
+    if not wk:
+        when = "Final"
+    elif payload.get("curPlayed"):
+        when = "Week %s, %s of %s played" % (wk, payload["curPlayed"], payload["curTotal"])
+    else:
+        when = "Week %s up next" % wk
+
+    desc = "%s — %s. %s." % (when, head,
+                             ", ".join("%s %s" % (o, num(v)) for o, v in order))
+    title = "CU Lions NFL Wins League"
+    return "\n".join([
+        '<meta name="description" content="%s">' % esc(desc),
+        '<meta property="og:type" content="website">',
+        '<meta property="og:site_name" content="%s">' % esc(title),
+        '<meta property="og:title" content="%s">' % esc(title),
+        '<meta property="og:description" content="%s">' % esc(desc),
+        '<meta property="og:url" content="%s/">' % SITE,
+        '<meta property="og:image" content="%s/preview.png">' % SITE,
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta property="og:image:alt" content="%s">' % esc(title),
+        '<meta name="twitter:card" content="summary_large_image">',
+        '<meta name="twitter:title" content="%s">' % esc(title),
+        '<meta name="twitter:description" content="%s">' % esc(desc),
+        '<meta name="twitter:image" content="%s/preview.png">' % SITE,
+    ])
 
 
 def read_json(path, default):
@@ -71,7 +123,8 @@ def main():
         raise SystemExit("FAIL: could not find the payload block in template.html")
 
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    doc = HEAD + "<!-- built " + stamp + " -->\n</head>\n<body>\n" + out + TAIL
+    doc = (HEAD + share_tags(payload) + "\n<!-- built " + stamp + " -->\n"
+           + "</head>\n<body>\n" + out + TAIL)
 
     with io.open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(doc)
