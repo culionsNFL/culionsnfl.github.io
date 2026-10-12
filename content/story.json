@@ -1,23 +1,25 @@
 {
- "note": "Week 5 · Thursday night",
- "lede": "Bill owns both sidelines in Tampa at Dallas tonight — his first free point of the season, and he has needed one. Then Sunday hands us Mark against Brian twice in the same afternoon.",
+ "note": "Week 5 · Monday, one game left",
+ "lede": "Mark's Ravens won Sunday night without Lamar Jackson, in overtime, after trailing by eight with 2:25 on the clock — the exact game Brian needed and did not get. The lead is back to four and a half. Only Monday night is left.",
  "beats": [
   {
-   "owner": "Bill",
-   "tag": "Tonight · Bill can't lose",
-   "text": "Buccaneers at Cowboys, 8:15, and he owns both benches. Tampa is 0-4 with Jalon Daniels filling in for Baker Mayfield's dislocated thumb and Dallas is laying a touchdown and a half, so the football should be one-sided — but the point lands either way. On seven, six behind Mark, he'll take it however it comes."
+   "owner": "Mark",
+   "tag": "Mark · Won it with the backup",
+   "text": "Tyler Huntley made his first start of the season and went 24-of-32 for 201 without an interception, finishing with eleven straight completions. Down 23-15 with 2:25 left, Baltimore went 71 yards in six plays, Huntley found Devontez Walker from seven, and Derrick Henry ran in the two-point conversion to tie it. Then a 14-play, seven-minute overtime drive and a Huntley sneak. Kyle Hamilton, an Atlanta kid, intercepted the pass that ended it."
   },
   {
-   "tag": "Sunday · Mark vs Brian, twice",
-   "text": "The 49ers go to Seattle at 4:25 and the Ravens go to Atlanta on Sunday night. Mark owns San Francisco and Baltimore; Brian owns Seattle and Atlanta. First place against joint second, two head-to-heads in one afternoon, and every point that changes hands moves directly between them. Nothing else this week comes close."
+   "owner": "Brian",
+   "tag": "Brian · Eight points, 2:25, gone",
+   "text": "Atlanta led 23-15 after Nick Folk's fourth field goal and could not finish it. Jessie Bates III had returned a Mark Andrews fumble 36 yards for the game's first touchdown — Andrews' first lost fumble in a regular-season game since 2019 — and Drake London caught seven for 118. Michael Penix Jr. took a sack on the last Falcons drive of regulation and hurt his ribs; Tua Tagovailoa threw the overtime interception. Brian stays on ten, tied with Jon and Patrick."
   },
   {
-   "tag": "Jon and Patrick, level on nine",
-   "text": "Indianapolis at Pittsburgh is the other direct collision. Patrick's Colts have won two straight behind Jonathan Taylor; Jon's Steelers are 2-2 and lost in Cleveland to a 56-yarder. Pittsburgh favored by a field goal at home, and one of them walks out of Sunday clear of the other."
+   "owner": "Harrison",
+   "tag": "Harrison · Second, and nothing to do",
+   "text": "No Harrison team played Sunday night and none plays tonight, so his three-and-a-half-point Sunday has to hold on its own. He sits on 10.5, four and a half behind Mark and half a point ahead of the three-way tie. For an owner who was seventh on Saturday, that is a good place to stand still."
   },
   {
-   "tag": "The nobody bowl",
-   "text": "Houston at Tennessee: Harrison's 0-4 Texans against Jon's 0-4 Titans, and somebody finally has to win a game. The Texans are favored by a touchdown on the road, which is the market's verdict on Tennessee's 37 points in four weeks. Second-lowest total on the board."
+   "tag": "Tonight · Jon vs Zach, the last point",
+   "text": "Buffalo at the Rams, and it is the only game left in the week. Los Angeles is favored at home and nobody is ruled out for them; Jon is without Josh Palmer and Ed Oliver, with D.J. Moore questionable on a 91-game streak. Jon wins and he is alone in third on eleven. Zach wins and he climbs out of the dungeon, barely."
   }
  ]
 }
