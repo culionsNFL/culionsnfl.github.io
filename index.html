@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CU Lions NFL Wins League">
 <meta name="twitter:description" content="Week 5, 14 of 15 played — Mark leads on 15. Mark 15, Harrison 10.5, Brian 10, Jon 10, Patrick 10, Bill 9.5, Anthony 8, Zach 5.">
 <meta name="twitter:image" content="https://culionsnfl.github.io/preview.png">
-<!-- built 2026-10-12T14:01:09Z -->
+<!-- built 2026-10-12T14:02:02Z -->
 </head>
 <body>
 <title>CU Lions NFL Wins League</title>
@@ -1555,7 +1555,7 @@
    "w": 1
   }
  },
- "updated": "2026-10-12T14:01:09Z",
+ "updated": "2026-10-12T14:02:02Z",
  "weekly": {
   "Anthony": [
    3.0,
@@ -1843,20 +1843,20 @@
     cum[o] = arr;
   });
 
-  // Where everyone stood before the most recent completed week.
+  // Where everyone stood at the end of the last COMPLETED week — cum[o][TW],
+  // not cum[o][TW-1]. The ranks it is compared against are live, so going back
+  // one more week made the arrows span two weeks and credit people with moves
+  // they did not make.
   var prevRank = {};
-  if (TW >= 2) {
+  if (TW >= 1) {
     var pr = 0, pv = null;
-    OWNERS.map(function (o) { return { o: o, v: cum[o][TW - 1] }; })
+    OWNERS.map(function (o) { return { o: o, v: cum[o][TW] }; })
       .sort(function (a, b) { return b.v - a.v || a.o.localeCompare(b.o); })
       .forEach(function (r, i) {
         if (pv === null || r.v !== pv) { pr = i + 1; pv = r.v; }
         prevRank[r.o] = pr;
       });
   }
-
-  var leaderTotal = Math.max.apply(null, OWNERS.map(function (o) { return cum[o][TW]; }));
-  if (!(leaderTotal > 0)) leaderTotal = 1;
 
   // Heat check — last completed week against the league average for that week.
   // Every game awards exactly one point somewhere, so the eight owners always
@@ -1921,13 +1921,13 @@
 
     // Rank movement, shown only when someone actually moved — in an eight-man
     // pool most weeks change nothing, and a row of dashes is just noise.
-    if (TW >= 2 && prevRank[r.owner]) {
+    if (TW >= 1 && prevRank[r.owner]) {
       var delta = prevRank[r.owner] - r.rank;
       if (delta !== 0) {
         var n = Math.abs(delta);
         var mv = el("span", "move" + (delta > 0 ? " up" : " down"),
           (delta > 0 ? "▲" : "▼") + n + (n === 1 ? " place" : " places"));
-        mv.title = "Was " + prevRank[r.owner] + " last week";
+        mv.title = "Was " + prevRank[r.owner] + " at the end of Week " + TW;
         who.appendChild(mv);
       }
     }
