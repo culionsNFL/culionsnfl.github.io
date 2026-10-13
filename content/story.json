@@ -1,25 +1,28 @@
 {
- "note": "Week 5 · Monday, one game left",
- "lede": "Mark's Ravens won Sunday night without Lamar Jackson, in overtime, after trailing by eight with 2:25 on the clock — the exact game Brian needed and did not get. The lead is back to four and a half. Only Monday night is left.",
+ "note": "Week 5 final · Week 6 ahead",
+ "lede": "Harrison could not finish — the one exception aside — and watched the clock expire on a spike with a field goal sitting there, so a half point is what he got. Jon went the other way: overtime at SoFi, 37-34, eleven points and sole possession of second. And at the top, still, is Mark, who lost two games by a combined 52, started a backup quarterback on Sunday night, won anyway, and ends the week leading by exactly the four points he led by before it. The evil empire does not appear to need a reason.",
  "beats": [
   {
-   "owner": "Mark",
-   "tag": "Mark · Won it with the backup",
-   "text": "Tyler Huntley made his first start of the season and went 24-of-32 for 201 without an interception, finishing with eleven straight completions. Down 23-15 with 2:25 left, Baltimore went 71 yards in six plays, Huntley found Devontez Walker from seven, and Derrick Henry ran in the two-point conversion to tie it. Then a 14-play, seven-minute overtime drive and a Huntley sneak. Kyle Hamilton, an Atlanta kid, intercepted the pass that ended it."
+   "owner": "Jon",
+   "tag": "Jon · Overtime, and second by himself",
+   "text": "Allen finished with 331 total yards, 121 of them rushing, and Buffalo needed every one. James Cook ran for two scores and then fumbled in overtime at the Rams' 20. Los Angeles drove to the Buffalo 30 and Greg Rousseau blocked the 48-yarder. Allen scrambled 19 and 13, and Tyler Bass won it from 45. Eleven points, clear of Harrison by half."
   },
   {
-   "owner": "Brian",
-   "tag": "Brian · Eight points, 2:25, gone",
-   "text": "Atlanta led 23-15 after Nick Folk's fourth field goal and could not finish it. Jessie Bates III had returned a Mark Andrews fumble 36 yards for the game's first touchdown — Andrews' first lost fumble in a regular-season game since 2019 — and Drake London caught seven for 118. Michael Penix Jr. took a sack on the last Falcons drive of regulation and hurt his ribs; Tua Tagovailoa threw the overtime interception. Brian stays on ten, tied with Jon and Patrick."
+   "tag": "Week 6 · Nobody owns both sides",
+   "text": "Fourteen games, fourteen head-to-heads — every one of them puts two owners on opposite sidelines. There is no Thursday gift, no free point hiding in a division game. Cincinnati, Detroit, Miami and Minnesota are on bye, so Bill, Patrick, Zach and Harrison each play the week a team short."
   },
   {
-   "owner": "Harrison",
-   "tag": "Harrison · Second, and nothing to do",
-   "text": "No Harrison team played Sunday night and none plays tonight, so his three-and-a-half-point Sunday has to hold on its own. He sits on 10.5, four and a half behind Mark and half a point ahead of the three-way tie. For an owner who was seventh on Saturday, that is a good place to stand still."
+   "tag": "Sunday · Jon at Mark, first against second",
+   "text": "Buffalo at Las Vegas, 4:25, and it is the only game that moves the top of the table. Jon is on a short week after a Monday night overtime game and stayed out west rather than fly home; he is also down to a thin receiver room, with D.J. Moore's 91-game streak over and Josh Palmer out. Las Vegas has not named a quarterback — Kirk Cousins was benched in Foxborough for Fernando Mendoza, the first pick in the draft."
   },
   {
-   "tag": "Tonight · Jon vs Zach, the last point",
-   "text": "Buffalo at the Rams, and it is the only game left in the week. Los Angeles is favored at home and nobody is ruled out for them; Jon is without Josh Palmer and Ed Oliver, with D.J. Moore questionable on a 91-game streak. Jon wins and he is alone in third on eleven. Zach wins and he climbs out of the dungeon, barely."
+   "tag": "Monday · Harrison at Mark",
+   "text": "Washington at San Francisco closes the week. The 49ers are 5-0 and favored by a touchdown and a half; Nick Bosa has missed three games with the calf and may be back. Jayden Daniels returned from the dislocated elbow, ran for 103 and two scores, and still did not win — the clock ran out on Washington's spike. Harrison has to go into Levi's to defend second."
+  },
+  {
+   "owner": "Zach",
+   "tag": "Zach · Five, and it is getting hard to watch",
+   "text": "The Rams had the ball in overtime at the Buffalo 30 and had a field goal blocked. The Chargers are 0-5 with a receiver room that is mostly injury report. Miami is on bye, which is arguably the best thing that happens to him this week. He gets Arizona at home and Dallas at Green Bay and could still finish the week on five."
   }
  ]
 }
