@@ -950,14 +950,16 @@
     cum[o] = arr;
   });
 
-  // Where everyone stood at the end of the last COMPLETED week — cum[o][TW],
-  // not cum[o][TW-1]. The ranks it is compared against are live, so going back
-  // one more week made the arrows span two weeks and credit people with moves
-  // they did not make.
+  // The arrows answer "what did the week being scored do to the table?", so the
+  // baseline is the standings BEFORE that week. Mid-week the week being scored
+  // is the live one (played > TW), so the baseline is the last complete week,
+  // TW. Between weeks the two are the same number and the baseline has to step
+  // back one, or every arrow silently disappears the moment a week closes.
+  var baseWeek = (played > TW) ? TW : TW - 1;
   var prevRank = {};
-  if (TW >= 1) {
+  if (baseWeek >= 1) {
     var pr = 0, pv = null;
-    OWNERS.map(function (o) { return { o: o, v: cum[o][TW] }; })
+    OWNERS.map(function (o) { return { o: o, v: cum[o][baseWeek] }; })
       .sort(function (a, b) { return b.v - a.v || a.o.localeCompare(b.o); })
       .forEach(function (r, i) {
         if (pv === null || r.v !== pv) { pr = i + 1; pv = r.v; }
@@ -1028,13 +1030,13 @@
 
     // Rank movement, shown only when someone actually moved — in an eight-man
     // pool most weeks change nothing, and a row of dashes is just noise.
-    if (TW >= 1 && prevRank[r.owner]) {
+    if (baseWeek >= 1 && prevRank[r.owner]) {
       var delta = prevRank[r.owner] - r.rank;
       if (delta !== 0) {
         var n = Math.abs(delta);
         var mv = el("span", "move" + (delta > 0 ? " up" : " down"),
           (delta > 0 ? "▲" : "▼") + n + (n === 1 ? " place" : " places"));
-        mv.title = "Was " + prevRank[r.owner] + " at the end of Week " + TW;
+        mv.title = "Was " + prevRank[r.owner] + " at the end of Week " + baseWeek;
         who.appendChild(mv);
       }
     }
