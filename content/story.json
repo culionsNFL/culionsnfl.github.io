@@ -1,28 +1,31 @@
 {
- "note": "Week 5 final · Week 6 ahead",
- "lede": "Harrison could not finish — the one exception aside — and watched the clock expire on a spike with a field goal sitting there, so a half point is what he got. Jon went the other way: overtime at SoFi, 37-34, eleven points and sole possession of second. And at the top, still, is Mark, who lost two games by a combined 52, started a backup quarterback on Sunday night, won anyway, and ends the week leading by exactly the four points he led by before it. The evil empire does not appear to need a reason.",
+ "note": "Week 6 · THE TITANS WON A FOOTBALL GAME",
+ "fx": "fireworks",
+ "lede": "THE TITANS WON. Three hundred and one days since the last one. Zero and five, seven straight losses, eleven straight inside the division, thirteen points down at halftime in Indianapolis with sixty-four yards of offense to their name — and then they scored twenty-six unanswered and walked out of Lucas Oil Stadium with it. At halftime the Colts honored Adam Vinatieri at midfield and he told the building it was a bad day to be a Titan. Reader, it was not.",
  "beats": [
   {
    "owner": "Jon",
-   "tag": "Jon · Overtime, and second by himself",
-   "text": "Allen finished with 331 total yards, 121 of them rushing, and Buffalo needed every one. James Cook ran for two scores and then fumbled in overtime at the Rams' 20. Los Angeles drove to the Buffalo 30 and Greg Rousseau blocked the 48-yarder. Allen scrambled 19 and 13, and Tyler Bass won it from 45. Eleven points, clear of Harrison by half."
+   "tag": "★ Tennessee 26, Indianapolis 20 ★",
+   "text": "They were outgained 399 to 186. They lost the ball-control battle by seventeen minutes. They had eleven first downs. NONE OF IT MATTERED. Chimere Dike returned a punt 58 yards and Cam Ward found Carnell Tate from eight for the rookie's first career touchdown. Four minutes later Julius Chestnut and James Williams came through the line, the punt went nowhere, and Femi Oladejo scooped it off the turf and ran fourteen yards into the end zone — Tennessee's first blocked-punt return touchdown since 2011 and the first one anybody has scored in the NFL this season. Taylor tied it. Joey Slye untied it from 49 with 2:03 left and salted it from 44 with 0:43. Fourth-and-seventeen, incomplete, ballgame."
   },
   {
-   "tag": "Week 6 · Nobody owns both sides",
-   "text": "Fourteen games, fourteen head-to-heads — every one of them puts two owners on opposite sidelines. There is no Thursday gift, no free point hiding in a division game. Cincinnati, Detroit, Miami and Minnesota are on bye, so Bill, Patrick, Zach and Harrison each play the week a team short."
+   "tag": "The defense did it, actually",
+   "text": "Six sacks, a season high, and three takeaways. Jeffery Simmons had two of the sacks, six tackles, a forced fumble AND the recovery, passed Ted Washington for tenth on the franchise sack list, and — per ESPN — gave the halftime speech that turned the thing. Amani Hooker had a career-high thirteen tackles and picked off Daniel Jones at the Indianapolis six. Cor'Dale Flott got another at the eleven. Robert Saleh has his first win as head coach, and the franchise has its 500th all time. They were seven-point underdogs."
   },
   {
-   "tag": "Sunday · Jon at Mark, first against second",
-   "text": "Buffalo at Las Vegas, 4:25, and it is the only game that moves the top of the table. Jon is on a short week after a Monday night overtime game and stayed out west rather than fly home; he is also down to a thin receiver room, with D.J. Moore's 91-game streak over and Josh Palmer out. Las Vegas has not named a quarterback — Kirk Cousins was benched in Foxborough for Fernando Mendoza, the first pick in the draft."
+   "owner": "Jon",
+   "tag": "Jon · Four for four",
+   "text": "And the Titans were only a quarter of it. Pittsburgh came back from 16-3 down and won in overtime on a Rodgers screen to Germie Bernard, who caught eleven balls. Kansas City handled the Chargers 22-6 and is 5-0. Buffalo went into Las Vegas and beat Mark 33-30 — Josh Allen tied Jim Kelly's franchise record of 258 career touchdown passes on a backhanded flip, Cook ran in the winner, and the Bills recovered the onside kick to end it. Four teams, four wins, third sweep anyone has managed this season and the first since Mark in Week 3."
   },
   {
-   "tag": "Monday · Harrison at Mark",
-   "text": "Washington at San Francisco closes the week. The 49ers are 5-0 and favored by a touchdown and a half; Nick Bosa has missed three games with the calf and may be back. Jayden Daniels returned from the dislocated elbow, ran for 103 and two scores, and still did not win — the clock ran out on Washington's spike. Harrison has to go into Levi's to defend second."
+   "owner": "Mark",
+   "tag": "Mark · One point so far",
+   "text": "The empire has one point with a game still to play. Chicago beat Atlanta behind Caleb Williams going 30-of-36 in his first game back from the hamstring, and that was all of it — Cleveland beat Baltimore 13-10 on a last-second field goal with Lamar Jackson out again, and Las Vegas lost to Jon. A four-point lead is down to one. Which means tonight, for the first time all season, seven owners sit down to root hard for Harrison's 1-3-1 Commanders, a team not one of them would otherwise think about."
   },
   {
    "owner": "Zach",
-   "tag": "Zach · Five, and it is getting hard to watch",
-   "text": "The Rams had the ball in overtime at the Buffalo 30 and had a field goal blocked. The Chargers are 0-5 with a receiver room that is mostly injury report. Miami is on bye, which is arguably the best thing that happens to him this week. He gets Arizona at home and Dallas at Green Bay and could still finish the week on five."
+   "tag": "Zach · On the board, at Bill's expense",
+   "text": "Green Bay beat Dallas 23-13 on Sunday night and Zach finally has something. The Packers led wire to wire and converted their first seven third downs; Dak Prescott threw interceptions on back-to-back second-quarter drives, both inside the Green Bay 30, and Dallas went scoreless in a first half for the first time since 2021. Kenny Clark, sent to Dallas in the Micah Parsons trade, got his first sack of the season — at Lambeau, against the team that traded him. Zach is up to six. Bill, who had the other side of it, finishes 0/3 and is the only owner blanked this week."
   }
  ]
 }
