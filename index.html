@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CU Lions NFL Wins League">
 <meta name="twitter:description" content="Week 6, 13 of 14 played — Mark leads on 16. Mark 16, Jon 15, Harrison 12.5, Patrick 12, Brian 11, Anthony 10, Bill 9.5, Zach 6.">
 <meta name="twitter:image" content="https://culionsnfl.github.io/preview.png">
-<!-- built 2026-10-19T16:02:22Z -->
+<!-- built 2026-10-19T16:04:12Z -->
 </head>
 <body>
 <title>CU Lions NFL Wins League</title>
@@ -126,7 +126,7 @@
     border-radius: 4px;
     background: linear-gradient(128deg, var(--band-1) 0%, var(--band-2) 100%);
     color: var(--band-ink);
-    padding: 30px 28px 0;
+    padding: 20px 26px 18px;
     isolation: isolate;
   }
   /* Chalked yard lines, angled across the ground — masked so they fade out
@@ -166,84 +166,151 @@
       var(--scrim-strong) 46%,
       var(--scrim-soft) 100%);
   }
+  /* Masthead: a wordmark and the three facts that change. Everything that
+     used to live up here — the format, the scoring, the standing joke about
+     who you have to blame — is static text that nobody in an eight-man league
+     needs read back to them every Sunday, so it moved to the footer and the
+     page now opens on the numbers. */
   .banner-body {
     position: relative;
-    text-align: center;
-  }
-  .banner-body > div {
-    max-width: 60ch;
-    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px 28px;
   }
   .eyebrow {
     font-family: var(--f-display);
     font-weight: 500;
-    font-size: 11.5px;
+    font-size: 11px;
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--band-sub);
-    margin: 2px 0 6px;
+    margin: 0 0 2px;
   }
   h1 {
     font-family: var(--f-display);
     font-weight: 600;
-    font-size: clamp(30px, 5.4vw, 46px);
+    font-size: clamp(27px, 4.4vw, 40px);
     line-height: 1.0;
-    letter-spacing: .005em;
+    letter-spacing: .01em;
     text-transform: uppercase;
     margin: 0;
     text-wrap: balance;
-  }
-  h1 .thin { font-weight: 400; color: var(--band-sub); display: block; }
-  .lede {
-    margin: 12px auto 0;
-    max-width: 54ch;
-    color: var(--band-sub);
-    font-size: 14.5px;
-    line-height: 1.55;
-    text-wrap: pretty;
   }
   .meta {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 0;
-    margin-top: 24px;
-    border-top: 1px solid var(--band-rule);
+    margin: 0;
   }
   .meta > div {
-    flex: 1 1 150px;
-    padding: 12px 16px 14px;
-    text-align: center;
-    border-right: 1px solid var(--band-rule);
+    padding: 0 0 0 18px;
+    margin-left: 18px;
+    text-align: left;
+    border-left: 1px solid var(--band-rule);
   }
-  .meta > div:last-child { border-right: 0; }
+  .meta > div:first-child { padding-left: 0; margin-left: 0; border-left: 0; }
+  .wordmark { flex: 0 1 auto; }
   .meta dt {
     font-family: var(--f-display);
-    font-size: 10.5px;
-    letter-spacing: .14em;
+    font-size: 9.5px;
+    letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--band-sub);
-    margin: 0 0 3px;
+    margin: 0 0 2px;
   }
   .meta dd {
     margin: 0;
     font-family: var(--f-mono);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--band-ink);
     font-variant-numeric: tabular-nums;
-  }
-  .meta-sub {
-    margin: 3px 0 0;
-    font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: .02em;
-    color: var(--band-sub);
-    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
   .live { color: var(--band-ink); }
+  @media (max-width: 860px) {
+    .banner-body { align-items: flex-start; }
+    .meta > div { padding-left: 14px; margin-left: 14px; }
+  }
+  /* Below this the three status items cannot share a line without colliding,
+     so they stop being columns and become rows under a rule. */
+  @media (max-width: 620px) {
+    .banner { padding: 18px 16px 16px; }
+    .banner-body { display: block; }
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      margin-top: 14px;
+      padding-top: 13px;
+      border-top: 1px solid var(--band-rule);
+    }
+    .meta > div {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      border-left: 0;
+    }
+    .meta dt { margin: 0; }
+  }
+
+  /* On the clock. Appears only while the current week still has a game in it,
+     so the one thing anybody is waiting on is the first thing under the
+     masthead instead of being buried in a slate near the footer. */
+  #onclock {
+    margin-top: 26px;
+    padding: 14px 18px 16px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 3px 3px 0;
+  }
+  .oc-label {
+    margin: 0 0 9px;
+    font-family: var(--f-display);
+    font-size: 10.5px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .oc-body { display: grid; gap: 10px; }
+  .oc-game {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+  .oc-side { display: inline-flex; align-items: center; gap: 7px; }
+  .oc-side b {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: .05em;
+  }
+  .oc-side em { font-style: normal; font-size: 13px; color: var(--ink-2); }
+  .oc-at { font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+  .oc-when {
+    margin-left: auto;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .oc-stake {
+    flex: 1 1 100%;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
   @media (max-width: 560px) {
-    .banner { padding: 22px 18px 0; }
+    .oc-when { margin-left: 0; flex: 1 1 100%; }
   }
 
   /* ---------- section ---------- */
@@ -269,7 +336,26 @@
      The editorial layer: one thesis sentence for the week, then the few
      threads worth knowing. Beats carry a rule in the owner's colour rather
      than a box, so this reads as a column and not as another card deck. */
-  #story-sec { margin-top: 34px; }
+  #story-sec { margin-top: 34px; position: relative; }
+  /* Celebration layer. Switched on only when story.json asks for it, so the
+     page goes back to normal next week by deleting one key. It sits behind the
+     type, never takes a click, and stops on its own rather than burning a
+     laptop battery for as long as the tab is open. */
+  #fx {
+    position: absolute;
+    inset: -18px -10px auto;
+    height: 340px;
+    width: calc(100% + 20px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .6s ease;
+  }
+  #fx.lit { opacity: 1; }
+  #story-sec .sec-head,
+  #story-sec .standfirst,
+  #story-sec .beats { position: relative; z-index: 1; }
+  @media (prefers-reduced-motion: reduce) { #fx { display: none; } }
   .standfirst {
     font-family: var(--f-display);
     font-weight: 400;
@@ -402,6 +488,37 @@
   .heat.hot  { color: #0b8a3e; }
   .heat.cold { color: #c0392f; }
   .heat b { font-family: var(--f-mono); font-weight: 600; letter-spacing: 0; }
+
+  /* Week record. Plain "3/4" needs no legend, so it leads the row and the
+     comparative chip follows it. */
+  .wk {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    font-family: var(--f-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    background: var(--raise);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .wk b {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .wk.sweep { border-color: var(--heat-hot); color: var(--heat-hot); }
+  .wk.sweep b { color: var(--heat-hot); }
+  .wk.blank { border-color: var(--line); color: var(--muted); }
+  .wk.blank b { color: var(--muted); }
   .who { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
   .dot {
     width: 10px; height: 10px; border-radius: 50%;
@@ -604,17 +721,34 @@
   .tip b { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
   .chart-host { position: relative; }
 
-  details.table-view { margin-top: 14px; }
-  details.table-view summary {
+  /* The chart is the same numbers as the table, drawn. It shares the card but
+     sits behind a disclosure so the table — the thing actually read — is not
+     pushed off the screen by it. */
+  details.chart-view { margin-top: 18px; border-top: 1px solid var(--line); }
+  details.chart-view summary {
     cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0 2px;
     font-family: var(--f-display);
-    font-size: 11.5px;
-    letter-spacing: .12em;
+    font-size: 11px;
+    letter-spacing: .13em;
     text-transform: uppercase;
     color: var(--accent);
-    padding: 6px 0;
   }
-  .tbl-scroll { overflow-x: auto; margin-top: 10px; }
+  details.chart-view summary::-webkit-details-marker { display: none; }
+  details.chart-view summary::before {
+    content: "▸";
+    font-size: 10px;
+    line-height: 1;
+    transition: transform .15s ease;
+  }
+  details.chart-view[open] summary::before { transform: rotate(90deg); }
+  details.chart-view summary:hover { color: var(--ink); }
+  details.chart-view .legend { margin-top: 14px; }
+  .tbl-scroll { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; font-size: 13px; }
   th, td {
     padding: 6px 10px;
@@ -639,7 +773,15 @@
     border-bottom: 1px solid var(--line);
   }
   tbody tr:last-child td { border-bottom: 0; }
-  td.tot { font-weight: 600; color: var(--ink); }
+  /* Total is the anchor column, so it is ruled off from the weekly run. */
+  td.tot, th.tot {
+    font-weight: 600;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    padding-right: 16px;
+  }
+  th.tot { color: var(--ink); }
+  tbody td.tot { font-size: 14px; }
 
   /* ---------- slate ---------- */
   .slate { display: grid; gap: 0; }
@@ -1545,7 +1687,7 @@
    "w": 1
   }
  },
- "updated": "2026-10-19T16:02:22Z",
+ "updated": "2026-10-19T16:04:12Z",
  "weekly": {
   "Anthony": [
    3.0,
@@ -1621,23 +1763,44 @@
     <div class="banner-photo" id="banner-photo" hidden></div>
 
     <div class="banner-body">
-      <div>
-        <p class="eyebrow" id="eyebrow">2026 NFL Regular Season</p>
-        <h1>CU Lions<span class="thin">NFL Wins League</span></h1>
-        <p class="lede">Eight owners, four teams each, all thirty-two franchises spoken for. One point per win, half for a tie. No trades, no waivers, nobody to blame but the guys you drafted.</p>
+      <div class="wordmark">
+        <p class="eyebrow" id="eyebrow">CU Lions · 2026 Regular Season</p>
+        <h1>NFL Wins League</h1>
       </div>
+      <dl class="meta" id="meta"></dl>
     </div>
-
-    <dl class="meta" id="meta"></dl>
   </header>
 
+  <aside id="onclock" hidden>
+    <p class="oc-label" id="oc-label"></p>
+    <div class="oc-body" id="oc-body"></div>
+  </aside>
+
   <section id="story-sec" hidden>
+    <canvas id="fx" aria-hidden="true"></canvas>
     <div class="sec-head">
       <h2>The story</h2>
       <span class="sec-note" id="story-note"></span>
     </div>
     <p class="standfirst" id="standfirst"></p>
     <div class="beats" id="beats"></div>
+  </section>
+
+  <section id="race-sec" hidden>
+    <div class="sec-head">
+      <h2>Week by week</h2>
+      <span class="sec-note" id="race-note">Points scored each week, and the running total</span>
+    </div>
+    <div class="card">
+      <div class="tbl-scroll" id="tbl"></div>
+      <details class="chart-view">
+        <summary>Cumulative line chart</summary>
+        <div class="legend" id="legend"></div>
+        <div class="chart-host" id="chart-host">
+          <div class="chart-scroll"><svg class="chart" id="chart" viewBox="0 0 760 320" role="img" aria-label="Cumulative pick'em points by week for each owner"></svg></div>
+        </div>
+      </details>
+    </div>
   </section>
 
   <section id="standings-sec">
@@ -1650,21 +1813,13 @@
     <div id="standings"></div>
   </section>
 
-  <section id="race-sec" hidden>
+  <section id="upnext-sec" hidden>
     <div class="sec-head">
-      <h2>Points by week</h2>
-      <span class="sec-note">Cumulative, regular season</span>
+      <h2 id="upnext-title">Up next</h2>
+      <span class="sec-note">Kickoffs ET · line and total</span>
     </div>
-    <div class="card">
-      <div class="legend" id="legend"></div>
-      <div class="chart-host" id="chart-host">
-        <div class="chart-scroll"><svg class="chart" id="chart" viewBox="0 0 760 320" role="img" aria-label="Cumulative pick'em points by week for each owner"></svg></div>
-      </div>
-      <details class="table-view">
-        <summary>Week-by-week table</summary>
-        <div class="tbl-scroll" id="tbl"></div>
-      </details>
-    </div>
+    <div class="slate" id="upnext"></div>
+    <p class="note" id="slate-note"></p>
   </section>
 
   <section id="results-sec" hidden>
@@ -1673,15 +1828,6 @@
       <span class="sec-note" id="results-note"></span>
     </div>
     <div class="slate" id="results"></div>
-  </section>
-
-  <section id="upnext-sec" hidden>
-    <div class="sec-head">
-      <h2 id="upnext-title">Up next</h2>
-      <span class="sec-note">Kickoffs ET · line and total</span>
-    </div>
-    <div class="slate" id="upnext"></div>
-    <p class="note" id="slate-note"></p>
   </section>
 
 
@@ -1741,7 +1887,7 @@
   // Weeks that are FINISHED. "played" can point at a week still in progress,
   // which is fine for "this week's haul" but wrong for any trend line.
   var TW = (D.completeWeeks != null) ? D.completeWeeks : played;
-  document.getElementById("eyebrow").textContent = D.season + " NFL Regular Season";
+  document.getElementById("eyebrow").textContent = "CU Lions · " + D.season + " Regular Season";
 
   // Be honest about a week in progress rather than claiming it's complete.
   var weekLabel;
@@ -1763,16 +1909,16 @@
 
   var seasonPct = Math.round((totalDecided / 272) * 100);
 
-  [["Season", weekLabel, null],
-   ["Games in the book", totalDecided + " of 272", seasonPct + "% of the season"],
-   ["Scoring", "Win 1 · Tie 0.5", null],
-   ["Last refresh", updLabel, null]
+  // The masthead carries status, not rules. Scoring and the format moved to
+  // the footer — everybody in this league already knows how it works, and the
+  // top of the page is worth more than a reminder.
+  [["Season", weekLabel],
+   ["Games in the book", totalDecided + " of 272 · " + seasonPct + "%"],
+   ["Last refresh", updLabel]
   ].forEach(function (pair, i) {
     var d = document.createElement("div");
     d.appendChild(el("dt", null, pair[0]));
-    var dd = el("dd", i === 3 ? "live" : null, pair[1]);
-    d.appendChild(dd);
-    if (pair[2]) d.appendChild(el("p", "meta-sub", pair[2]));
+    d.appendChild(el("dd", i === 2 ? "live" : null, pair[1]));
     document.getElementById("meta").appendChild(d);
   });
 
@@ -1806,7 +1952,110 @@
       beat.appendChild(el("p", null, b.text));
       host.appendChild(beat);
     });
+
+    if (S.fx === "fireworks") fireworks();
   })();
+
+  /* Fireworks. Shells launch from the bottom of the story section, burst, and
+     the sparks fall with a little drag. Runs for a fixed stretch and then stops
+     for good — a standings page that animates forever is a standings page
+     nobody leaves open. Skipped entirely under prefers-reduced-motion, and it
+     never throws if the canvas is missing. */
+  function fireworks() {
+    var cv = document.getElementById("fx");
+    if (!cv || !cv.getContext) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var ctx = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0;
+    function size() {
+      var r = cv.getBoundingClientRect();
+      W = r.width; H = r.height;
+      cv.width = Math.max(1, Math.round(W * dpr));
+      cv.height = Math.max(1, Math.round(H * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    size();
+    window.addEventListener("resize", size);
+
+    // Titans two-tone plus the league blue, so it reads as this week's colours
+    // rather than generic confetti.
+    // No additive blending and no white: the page ground is pale, so "lighter"
+    // washes every spark out toward the paper colour. Plain source-over keeps
+    // the navy and the red readable.
+    var HUES = ["#1F6FB8", "#0C2340", "#C8102E", "#D9A520", "#0B8A3E"];
+    var shells = [], sparks = [], t0 = performance.now(), RUN = 11000, raf = 0;
+
+    function launch() {
+      shells.push({
+        x: W * (0.12 + Math.random() * 0.76),
+        y: H,
+        vy: -(3.4 + Math.random() * 1.5),
+        fuse: 36 + Math.random() * 26,
+        c: HUES[(Math.random() * HUES.length) | 0]
+      });
+    }
+
+    function burst(s) {
+      var n = 52 + ((Math.random() * 24) | 0);
+      for (var i = 0; i < n; i++) {
+        var a = (Math.PI * 2 * i) / n + Math.random() * 0.2;
+        var sp = 1.1 + Math.random() * 3.1;
+        sparks.push({
+          x: s.x, y: s.y,
+          vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+          life: 54 + Math.random() * 36, age: 0, c: s.c
+        });
+      }
+    }
+
+    // Open with a volley so the page is already celebrating when it lands,
+    // rather than making anyone wait for the first shell.
+    launch(); launch(); launch();
+    var since = 0;
+    function frame(now) {
+      var done = now - t0 > RUN;
+      ctx.clearRect(0, 0, W, H);
+
+      if (!done && --since <= 0) { launch(); since = 9 + ((Math.random() * 12) | 0); }
+
+
+      for (var i = shells.length - 1; i >= 0; i--) {
+        var s = shells[i];
+        s.x += 0.2; s.y += s.vy; s.vy += 0.035; s.fuse--;
+        ctx.globalAlpha = 0.9;
+        ctx.fillStyle = s.c;
+        ctx.fillRect(s.x - 1, s.y - 3, 2, 6);
+        if (s.fuse <= 0 || s.vy >= -0.4) { burst(s); shells.splice(i, 1); }
+      }
+
+      for (var j = sparks.length - 1; j >= 0; j--) {
+        var p = sparks[j];
+        p.x += p.vx; p.y += p.vy;
+        p.vy += 0.045; p.vx *= 0.985; p.vy *= 0.985;
+        p.age++;
+        var k = 1 - p.age / p.life;
+        if (k <= 0) { sparks.splice(j, 1); continue; }
+        ctx.globalAlpha = k;
+        ctx.fillStyle = p.c;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.3 * k + 0.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+
+      if (done && !shells.length && !sparks.length) {
+        cv.classList.remove("lit");
+        cancelAnimationFrame(raf);
+        return;
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    cv.classList.add("lit");
+    raf = requestAnimationFrame(frame);
+  }
 
   /* ---------------- standings ---------------- */
   var table = OWNERS.map(function (o) {
@@ -1816,7 +2065,6 @@
   });
 
   var top = table[0].p;
-  var maxBar = Math.max(top, 1);
   var rank = 0, prev = null;
   table.forEach(function (r, i) {
     if (prev === null || r.p !== prev) { rank = i + 1; prev = r.p; }
@@ -1827,8 +2075,7 @@
     played === 0
       ? "Nobody has done anything yet"
       : "Leader holds " + pts(top) + " points" +
-        (played >= 1 ? " · chip = your Week " + played +
-          " against the average owner's Week " + played : "");
+        (played >= 1 ? " · chips: record so far this week, then that haul vs the average owner" : "");
 
   if (OWNERS.indexOf(ME) === -1) ME = null;
 
@@ -1870,6 +2117,48 @@
     var hauls = OWNERS.map(function (o) { return (D.weekly[o] || [])[HW - 1] || 0; });
     var avg = hauls.reduce(function (a, b) { return a + b; }, 0) / OWNERS.length;
     OWNERS.forEach(function (o, i) { heat[o] = { got: hauls[i], avg: avg, d: hauls[i] - avg }; });
+  }
+
+  /* Week record: "3/4" of games ALREADY DECIDED, then what is still out there.
+     Numerator and denominator have to describe the same set of games — scoring
+     a decided-games numerator against a scheduled-games denominator reads as a
+     contradiction ("1/4 with one to play" implies five games). What is missing
+     from four goes in the suffix instead: games left, and whether a team is on
+     bye. */
+  var slate = {};
+  OWNERS.forEach(function (o) { slate[o] = { n: 0, done: 0 }; });
+  (D.games || []).forEach(function (g) {
+    if (g.wk !== HW) return;
+    [g.away, g.home].forEach(function (t) {
+      var o = ownerOf[t];
+      if (!o) return;
+      slate[o].n++;
+      if (g.done) slate[o].done++;
+    });
+  });
+
+  function weekChip(owner) {
+    var s = slate[owner];
+    if (!s || !s.n) return null;
+    var got = (D.weekly[owner] || [])[HW - 1] || 0;
+    var left = s.n - s.done, byes = 4 - s.n;
+
+    var tail = [];
+    if (left) tail.push(left + " to play");
+    if (byes > 0) tail.push(byes === 1 ? "bye" : byes + " byes");
+    if (!tail.length) tail.push("W" + HW);
+
+    // A sweep or a blank is only a sweep or a blank once the week has finished.
+    var settled = !left;
+    var chip = el("span", "wk" + (settled && s.done && got === s.done ? " sweep"
+                                : settled && s.done && got === 0 ? " blank" : ""));
+    chip.appendChild(el("b", null, pts(got) + "/" + s.done));
+    chip.appendChild(document.createTextNode(" · " + tail.join(" · ")));
+    chip.title = "Week " + HW + ": " + pts(got) + " point" + (got === 1 ? "" : "s") +
+                 " from " + s.done + " game" + (s.done === 1 ? "" : "s") + " decided" +
+                 (left ? ", " + left + " still to play" : "") +
+                 (byes > 0 ? ", " + byes + " team" + (byes === 1 ? "" : "s") + " on bye" : "") + ".";
+    return chip;
   }
 
   function heatChip(owner) {
@@ -1915,7 +2204,10 @@
     if (r.p === top && played > 0) who.appendChild(el("span", "pill", "Leader"));
     if (r.owner === ME) who.appendChild(el("span", "pill mine", "You"));
 
-    // How the week actually went for them, relative to everyone else.
+    // Record first — it is the one number that needs no explaining — then
+    // how that stacked up against everyone else.
+    var wc = weekChip(r.owner);
+    if (wc) who.appendChild(wc);
     var chip = heatChip(r.owner);
     if (chip) who.appendChild(chip);
 
@@ -1941,24 +2233,6 @@
         (haul > 0 ? "+" + pts(haul) : "0") + " in W" + played));
     }
     row.appendChild(ptsCell);
-
-    // Bar length is the owner's total against the leader's; the four
-    // internal divisions are the four teams' shares of it.
-    if (played > 0) {
-      var trend = el("div", "trend");
-      var bar = el("div", "bar");
-      r.teams.slice().sort(function (a, b) { return teamPts(b) - teamPts(a); })
-        .forEach(function (t) {
-          var seg = el("div", "seg");
-          var frac = teamPts(t) / maxBar;
-          seg.style.width = "max(0px, calc(" + (frac * 100).toFixed(2) + "% - 1.5px))";
-          seg.style.background = COLOR[r.owner];
-          seg.title = TEAM[t] + " — " + pts(teamPts(t)) + " pt";
-          bar.appendChild(seg);
-        });
-      trend.appendChild(bar);
-      row.appendChild(trend);
-    }
 
     var chips = el("div", "teams");
     r.teams.slice().sort(function (a, b) { return teamPts(b) - teamPts(a); }).forEach(function (t) {
@@ -2020,8 +2294,8 @@
   if (PW >= 2) {
     document.getElementById("race-sec").hidden = false;
     if (partial) {
-      document.querySelector("#race-sec .sec-note").textContent =
-        "Cumulative · Week " + PW + " still in progress";
+      document.getElementById("race-note").textContent =
+        "Points scored each week · Week " + PW + " still in progress";
     }
 
     var lg = document.getElementById("legend");
@@ -2184,19 +2458,23 @@
       if (e.touches[0]) { show(e.touches[0]); }
     }, { passive: true });
 
-    /* table view (relief for the light-mode contrast warning) */
+    /* The table. Total sits immediately after the name and the weeks run
+       newest-first, so the two numbers anyone actually wants — where you stand
+       and what you just did — are both visible without scrolling a table that
+       grows a column every Sunday. */
     var t = el("table");
     var thead = el("thead"), hr = el("tr");
     hr.appendChild(el("th", null, "Owner"));
-    for (var k = 1; k <= PW; k++) hr.appendChild(el("th", null, "W" + k + (partial && k === PW ? "*" : "")));
-    hr.appendChild(el("th", null, "Total"));
+    hr.appendChild(el("th", "tot", "Total"));
+    for (var k = PW; k >= 1; k--) hr.appendChild(el("th", null, "W" + k + (partial && k === PW ? "*" : "")));
     thead.appendChild(hr); t.appendChild(thead);
     var tb = el("tbody");
     table.forEach(function (r) {
       var tr = el("tr");
       tr.appendChild(el("td", null, r.owner));
-      (D.weekly[r.owner] || []).slice(0, PW).forEach(function (v) { tr.appendChild(el("td", null, pts(v))); });
       tr.appendChild(el("td", "tot", pts(r.p)));
+      var wk = (D.weekly[r.owner] || []).slice(0, PW);
+      for (var j = wk.length - 1; j >= 0; j--) tr.appendChild(el("td", null, pts(wk[j])));
       tb.appendChild(tr);
     });
     t.appendChild(tb);
@@ -2293,7 +2571,55 @@
     var todo = games.filter(function (g) { return !g.done; })
       .sort(function (a, b) { return String(a.kick).localeCompare(String(b.kick)); });
 
+    // ---- on the clock ----
+    // The same unplayed games, lifted to the top of the page with what each
+    // one is actually worth. Written from the live table so it cannot drift
+    // out of step with the standings the way hand-written text does.
     if (todo.length) {
+      var oc = document.getElementById("onclock");
+      oc.hidden = false;
+      document.getElementById("oc-label").textContent =
+        todo.length === 1 ? "One game left in Week " + todo[0].wk
+                          : todo.length + " games left in Week " + todo[0].wk;
+
+      var ocBody = document.getElementById("oc-body");
+      todo.slice(0, 4).forEach(function (g) {
+        var row = el("div", "oc-game");
+        [[g.away, "away"], [g.home, "home"]].forEach(function (pair, i) {
+          if (i) row.appendChild(el("span", "oc-at", "at"));
+          var o = ownerOf[pair[0]];
+          var side = el("span", "oc-side");
+          var dot = el("span", "dot");
+          dot.style.background = COLOR[o];
+          side.appendChild(dot);
+          side.appendChild(el("b", null, pair[0]));
+          side.appendChild(el("em", null, o));
+          row.appendChild(side);
+        });
+        row.appendChild(el("span", "oc-when", kickLabel(g.kick)));
+
+        // What the point does to the table, in the owners' own numbers.
+        var ha = ownerOf[g.away], hh = ownerOf[g.home];
+        if (ha !== hh) {
+          var lead = table[0];
+          var bits = [ha, hh].map(function (o) {
+            var cur = D.points[o], rk = 0;
+            table.forEach(function (r, ix) { if (r.owner === o) rk = ix + 1; });
+            var after = cur + 1, gap = lead.p - after;
+            if (o === lead.owner) {
+              return o + " wins and stretches it to " + pts(after - table[1].p);
+            }
+            return o + " wins and is " + (gap <= 0 ? "level with" : pts(gap) + " back of") +
+                   " " + lead.owner;
+          });
+          row.appendChild(el("p", "oc-stake", bits.join(" · ") + "."));
+        } else {
+          row.appendChild(el("p", "oc-stake",
+            ownerOf[g.away] + " owns both sides — the point is banked either way."));
+        }
+        ocBody.appendChild(row);
+      });
+
       document.getElementById("upnext-sec").hidden = false;
       document.getElementById("upnext-title").textContent =
         "Week " + todo[0].wk + " — still to play";
@@ -2353,6 +2679,8 @@
   })();
 
   document.getElementById("foot").textContent =
+    "Eight owners, four teams each, all thirty-two franchises spoken for. One point per win, " +
+    "half for a tie, regular season only. No trades, no waivers, nobody to blame but the guys you drafted. " +
     "Records computed from finished " + D.season + " regular-season games (nflverse play-by-play schedule data), " +
     "checked against league totals before publishing: " + D.checks.wins + " wins, " +
     D.checks.losses + " losses, " + D.checks.ties + " ties across " + D.checks.teams +
