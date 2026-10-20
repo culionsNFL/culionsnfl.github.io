@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CU Lions NFL Wins League">
 <meta name="twitter:description" content="Week 7 up next — Mark leads on 17. Mark 17, Jon 15, Harrison 12.5, Patrick 12, Brian 11, Anthony 10, Bill 9.5, Zach 6.">
 <meta name="twitter:image" content="https://culionsnfl.github.io/preview.png">
-<!-- built 2026-10-20T17:09:22Z -->
+<!-- built 2026-10-20T17:15:17Z -->
 </head>
 <body>
 <title>CU Lions NFL Wins League</title>
@@ -1684,7 +1684,7 @@
    "w": 1
   }
  },
- "updated": "2026-10-20T17:09:22Z",
+ "updated": "2026-10-20T17:15:17Z",
  "weekly": {
   "Anthony": [
    3.0,
@@ -2641,14 +2641,19 @@
         });
         row.appendChild(el("span", "oc-when", kickLabel(g.kick)));
 
-        // What the point does to the table, in the owners' own numbers.
+        // A game between two of the same owner's teams pays him either way —
+        // true no matter what else happens, so it is worth saying whenever.
         var ha = ownerOf[g.away], hh = ownerOf[g.home];
-        if (ha !== hh) {
+        if (ha === hh) {
+          row.appendChild(el("p", "oc-stake",
+            ha + " owns both sides — the point is banked either way."));
+        } else if (todo.length === 1) {
+          // "X wins and is N back" is only honest when this is the last game
+          // standing. With a full slate still to play, every other result
+          // moves the same numbers, so the line would be quietly wrong.
           var lead = table[0];
           var bits = [ha, hh].map(function (o) {
-            var cur = D.points[o], rk = 0;
-            table.forEach(function (r, ix) { if (r.owner === o) rk = ix + 1; });
-            var after = cur + 1, gap = lead.p - after;
+            var after = D.points[o] + 1, gap = lead.p - after;
             if (o === lead.owner) {
               return o + " wins and stretches it to " + pts(after - table[1].p);
             }
@@ -2656,9 +2661,6 @@
                    " " + lead.owner;
           });
           row.appendChild(el("p", "oc-stake", bits.join(" · ") + "."));
-        } else {
-          row.appendChild(el("p", "oc-stake",
-            ownerOf[g.away] + " owns both sides — the point is banked either way."));
         }
         ocBody.appendChild(row);
       });
