@@ -1,31 +1,29 @@
 {
- "note": "Week 6 · THE TITANS WON A FOOTBALL GAME",
- "fx": "fireworks",
- "lede": "THE TITANS WON. Three hundred and one days since the last one. Zero and five, seven straight losses, eleven straight inside the division, thirteen points down at halftime in Indianapolis with sixty-four yards of offense to their name — and then they scored twenty-six unanswered and walked out of Lucas Oil Stadium with it. At halftime the Colts honored Adam Vinatieri at midfield and he told the building it was a bad day to be a Titan. Reader, it was not.",
+ "note": "Week 6 final · Week 7 ahead",
+ "lede": "Jon had the best week anyone has had since September — four teams, four wins — and gained nothing, because Mark's 49ers closed Monday night and the lead went back to two. Underneath them the table compressed: Harrison, Patrick and Brian are separated by a point and a half, Bill was blanked, and Tennessee and Green Bay both won games they were not supposed to.",
  "beats": [
   {
-   "owner": "Jon",
-   "tag": "★ Tennessee 26, Indianapolis 20 ★",
-   "text": "They were outgained 399 to 186. They lost the ball-control battle by seventeen minutes. They had eleven first downs. NONE OF IT MATTERED. Chimere Dike returned a punt 58 yards and Cam Ward found Carnell Tate from eight for the rookie's first career touchdown. Four minutes later Julius Chestnut and James Williams came through the line, the punt went nowhere, and Femi Oladejo scooped it off the turf and ran fourteen yards into the end zone — Tennessee's first blocked-punt return touchdown since 2011 and the first one anybody has scored in the NFL this season. Taylor tied it. Joey Slye untied it from 49 with 2:03 left and salted it from 44 with 0:43. Fourth-and-seventeen, incomplete, ballgame."
-  },
-  {
-   "tag": "The defense did it, actually",
-   "text": "Six sacks, a season high, and three takeaways. Jeffery Simmons had two of the sacks, six tackles, a forced fumble AND the recovery, passed Ted Washington for tenth on the franchise sack list, and — per ESPN — gave the halftime speech that turned the thing. Amani Hooker had a career-high thirteen tackles and picked off Daniel Jones at the Indianapolis six. Cor'Dale Flott got another at the eleven. Robert Saleh has his first win as head coach, and the franchise has its 500th all time. They were seven-point underdogs."
-  },
-  {
-   "owner": "Jon",
-   "tag": "Jon · Four for four",
-   "text": "And the Titans were only a quarter of it. Pittsburgh came back from 16-3 down and won in overtime on a Rodgers screen to Germie Bernard, who caught eleven balls. Kansas City handled the Chargers 22-6 and is 5-0. Buffalo went into Las Vegas and beat Mark 33-30 — Josh Allen tied Jim Kelly's franchise record of 258 career touchdown passes on a backhanded flip, Cook ran in the winner, and the Bills recovered the onside kick to end it. Four teams, four wins, third sweep anyone has managed this season and the first since Mark in Week 3."
-  },
-  {
    "owner": "Mark",
-   "tag": "Mark · One point so far",
-   "text": "The empire has one point with a game still to play. Chicago beat Atlanta behind Caleb Williams going 30-of-36 in his first game back from the hamstring, and that was all of it — Cleveland beat Baltimore 13-10 on a last-second field goal with Lamar Jackson out again, and Las Vegas lost to Jon. A four-point lead is down to one. Which means tonight, for the first time all season, seven owners sit down to root hard for Harrison's 1-3-1 Commanders, a team not one of them would otherwise think about."
+   "tag": "Mark · Answers, every time",
+   "text": "Two points and a lead restored. San Francisco beat Washington 23-17 on Monday to go 6-0, building a 20-3 half behind two Christian McCaffrey touchdowns and holding on after Jayden Daniels threw for 300. Chicago won in Atlanta with Caleb Williams back from the hamstring and 30-of-36. The other half of his week was losses — Baltimore fell 13-10 in Cleveland without Lamar Jackson, Las Vegas lost to Jon — and he still gained."
+  },
+  {
+   "owner": "Jon",
+   "tag": "Jon · Four for four, no closer",
+   "text": "The Titans won their first game of the season in Indianapolis, down thirteen at half with sixty-four yards of offense, on a blocked punt and two late Joey Slye field goals. Pittsburgh came back from 16-3 to win in overtime. Kansas City handled the Chargers. Buffalo beat Mark in Las Vegas, where Josh Allen tied Jim Kelly's franchise record of 258 touchdown passes. Four from four — the third sweep of the season and the first since Mark in Week 3 — and the gap is still two."
+  },
+  {
+   "tag": "The chase · A point and a half",
+   "text": "Harrison took New England and Houston and lost Washington on Monday, finishing on 12.5. Patrick had Cleveland's last-second win over Baltimore and Carolina's over Philadelphia, which puts him on 12. Brian got Jacksonville's loss in London but New Orleans' thirty-four unanswered against the Giants, and sits on 11. Three owners, a point and a half, and all three play twice against the top two in Week 7."
   },
   {
    "owner": "Zach",
-   "tag": "Zach · On the board, at Bill's expense",
-   "text": "Green Bay beat Dallas 23-13 on Sunday night and Zach finally has something. The Packers led wire to wire and converted their first seven third downs; Dak Prescott threw interceptions on back-to-back second-quarter drives, both inside the Green Bay 30, and Dallas went scoreless in a first half for the first time since 2021. Kenny Clark, sent to Dallas in the Micah Parsons trade, got his first sack of the season — at Lambeau, against the team that traded him. Zach is up to six. Bill, who had the other side of it, finishes 0/3 and is the only owner blanked this week."
+   "tag": "Zach and Bill · Opposite directions",
+   "text": "Green Bay beat Dallas 23-13 on Sunday night, which was both Zach's only point and Bill's whole problem. The Packers led wire to wire, converted their first seven third downs, and Dak Prescott threw interceptions on back-to-back drives inside the Green Bay 30. Bill finished 0 for 3 — the Giants, the Buccaneers and the Cowboys all lost, with Cincinnati on bye — and is the only owner who came out of Week 6 with nothing."
+  },
+  {
+   "tag": "Week 7 · It starts Thursday",
+   "text": "New England at Chicago, and it is Harrison against Mark again four days after the last one. Both teams are 4-2. Caleb Williams is off the injury report entirely; the Patriots lost three offensive linemen during the Jets game and play on a short week against a front that sacked Michael Penix Jr. five times. Jalen Hurts is on injured reserve with a blood clot and Lamar Jackson's ankle is still day to day — two of the four teams at the top of this league have a quarterback question going into the weekend."
   }
  ]
 }
