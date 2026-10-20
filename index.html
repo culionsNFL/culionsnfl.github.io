@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CU Lions NFL Wins League">
 <meta name="twitter:description" content="Week 7 up next — Mark leads on 17. Mark 17, Jon 15, Harrison 12.5, Patrick 12, Brian 11, Anthony 10, Bill 9.5, Zach 6.">
 <meta name="twitter:image" content="https://culionsnfl.github.io/preview.png">
-<!-- built 2026-10-20T17:09:01Z -->
+<!-- built 2026-10-20T17:09:22Z -->
 </head>
 <body>
 <title>CU Lions NFL Wins League</title>
@@ -1684,7 +1684,7 @@
    "w": 1
   }
  },
- "updated": "2026-10-20T17:09:01Z",
+ "updated": "2026-10-20T17:09:22Z",
  "weekly": {
   "Anthony": [
    3.0,
@@ -2569,18 +2569,64 @@
       .sort(function (a, b) { return String(a.kick).localeCompare(String(b.kick)); });
 
     // ---- on the clock ----
-    // The same unplayed games, lifted to the top of the page with what each
-    // one is actually worth. Written from the live table so it cannot drift
-    // out of step with the standings the way hand-written text does.
+    // Unplayed games lifted to the top of the page with what each one is
+    // actually worth. Written from the live table so it cannot drift out of
+    // step with the standings the way hand-written text does.
+    //
+    // Two modes. Mid-week it is a countdown: the games still outstanding.
+    // Once a week closes and the next one has not started, fourteen fixtures
+    // is not a headline, so it picks the ones that matter — Thursday always,
+    // then by how much is riding on them.
     if (todo.length) {
       var oc = document.getElementById("onclock");
       oc.hidden = false;
-      document.getElementById("oc-label").textContent =
-        todo.length === 1 ? "One game left in Week " + todo[0].wk
-                          : todo.length + " games left in Week " + todo[0].wk;
+      var started = (D.curPlayed || 0) > 0, picks;
+
+      if (started) {
+        document.getElementById("oc-label").textContent =
+          todo.length === 1 ? "One game left in Week " + todo[0].wk
+                            : todo.length + " games left in Week " + todo[0].wk;
+        picks = todo.slice(0, 4);
+      } else {
+        document.getElementById("oc-label").textContent =
+          "Week " + todo[0].wk + " · the ones that matter";
+        var rankOf = {};
+        table.forEach(function (r, i) { rankOf[r.owner] = i + 1; });
+        var opener = todo[0];
+        var ranked = todo.filter(function (g) { return g !== opener; })
+          .map(function (g) {
+            var a = ownerOf[g.away], h = ownerOf[g.home], s = 16 - (rankOf[a] + rankOf[h]);
+            if (a === h) s += 3;                                       // a banked point is news
+            if (a === table[0].owner || h === table[0].owner) s += 4;  // so is the leader
+            if (/\s(2[0-3]):/.test(g.kick || "")) s += 3;              // and so is primetime
+            return { g: g, s: s };
+          })
+          .sort(function (p, q) {
+            return q.s - p.s || String(p.g.kick).localeCompare(String(q.g.kick));
+          });
+
+        // The leader is in every high-scoring game, which would hand back four
+        // rows about one owner. Two appearances each keeps it a week preview
+        // rather than a Mark preview.
+        var seen = {};
+        function take(g) {
+          var a = ownerOf[g.away], h = ownerOf[g.home];
+          seen[a] = (seen[a] || 0) + 1;
+          if (h !== a) seen[h] = (seen[h] || 0) + 1;
+        }
+        function room(g) {
+          var a = ownerOf[g.away], h = ownerOf[g.home];
+          return (seen[a] || 0) < 2 && (seen[h] || 0) < 2;
+        }
+        picks = [opener];
+        take(opener);
+        ranked.forEach(function (x) {
+          if (picks.length < 4 && room(x.g)) { picks.push(x.g); take(x.g); }
+        });
+      }
 
       var ocBody = document.getElementById("oc-body");
-      todo.slice(0, 4).forEach(function (g) {
+      picks.forEach(function (g) {
         var row = el("div", "oc-game");
         [[g.away, "away"], [g.home, "home"]].forEach(function (pair, i) {
           if (i) row.appendChild(el("span", "oc-at", "at"));
