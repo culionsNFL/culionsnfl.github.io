@@ -1,29 +1,34 @@
 {
- "note": "Week 7 · Monday night to come",
- "lede": "Mark won on Thursday and then lost everything else. San Francisco dropped its first game of the season in Atlanta, Baltimore gave up thirty-five unanswered to Cincinnati, Las Vegas was down 28-6 at half — one point from four. Jon could not take advantage, getting only Pittsburgh. The man who did was Bill, three from three with Dallas still to play tonight, and the table behind the leader has gone from a chase to a scrum.",
+ "note": "Week 8 · What's ahead",
+ "lede": "Week 8 starts tonight at Lambeau and ends with Mark on Monday night in Seattle. In between is the game this season has been building toward: Baltimore at Buffalo, first against second, Mark against Jon, with Lamar Jackson expected back after three weeks out. Four teams are on bye, Mark is down to three games and Jon has four, which is the kind of week that moves a two-point lead in either direction.",
  "beats": [
   {
-   "tag": "★ Tonight · Dallas at Philadelphia ★",
-   "text": "Bill against Anthony, 8:15, the last point of Week 7. Dallas is favored by four and a half on the road in a division game, which is what happens when the home team has lost four straight scoring 58 points total and is starting Tanner McKee — Jalen Hurts is on injured reserve with blood clots in his calf and lungs and is expected to miss the season. Saquon Barkley is questionable but practiced in full on Saturday for the first time since the hamstring, and Dallas ranks 30th in defense. Bill wins and he has had the week of his season; Anthony wins and he is off the bottom of the pack."
+   "tag": "★ Sunday · Baltimore at Buffalo ★",
+   "text": "One o'clock, and it is the whole table in one game. Jackson practiced in full on Wednesday for the first time since the high ankle sprain — Tyler Huntley went 1-2 in his place and faded badly in Cincinnati, and Baltimore is 4-3 and last in a division where everyone is at or above .500. Jon's Bills are 5-1 and rested, and Buffalo is 8-0 all time coming out of a bye with Josh Allen. D.J. Moore and Ed Oliver were both limited Wednesday and should be back. Bills favored by three and a half, highest total on the board."
   },
   {
-   "owner": "Mark",
-   "tag": "Mark · One from four",
-   "text": "The 49ers were 6-0 and lost 29-20 in Atlanta, leading 14-3 before giving up 23 straight — they outgained the Falcons 400 to 295 and turned it over four times, Brock Purdy throwing two interceptions and George Kittle fumbling it away at the end. Baltimore led Cincinnati 13-0 at halftime and lost 35-13, giving up five straight touchdown drives with Lamar Jackson out a third week and Joe Burrow going 16-of-18 after the break. Las Vegas trailed the Rams 28-6 at half. Only Thursday saved him, and the lead is two."
-  },
-  {
-   "owner": "Bill",
-   "tag": "Bill · Three from three",
-   "text": "A fortnight ago he was blanked and last in points per week. Cincinnati put 35 on Baltimore. Tampa Bay beat Carolina 43-13 on 258 rushing yards, a blocked field goal returned for a touchdown and a strip-sack returned for another, with Baker Mayfield back from the thumb and barely needed. The Giants beat Houston in overtime with J.J. McCarthy making his first start for them and Devin Singletary winning it from 30 yards. Nine and a half to twelve and a half in one afternoon, and he still has Dallas."
+   "owner": "Patrick",
+   "tag": "Tonight · Carolina at Green Bay",
+   "text": "Patrick against Zach, and the shape of it is odd — two of the league's best passing offenses, two of its worst run games. Bryce Young is second in passing yards per game, Jordan Love fourth. Green Bay's rushing offense ranks last and Carolina's run defense ranks last, a week after giving up 258 to Tampa Bay. The Panthers are down three corners and lost Taylor Moton for the season this week. Green Bay's secondary leads the league with nine interceptions. Packers by three and a half."
   },
   {
    "owner": "Jon",
-   "tag": "Jon · Kansas City finally lost",
-   "text": "And it was not close: 20-3 in Seattle, the first game of Patrick Mahomes' career in which the Chiefs never reached the red zone, and only the second full game of his career without a touchdown pass. Jaxon Smith-Njigba caught nine for 150. Kenneth Walker III got 36 yards against the team that traded him. Tennessee led Cleveland 14-0 and lost on a last-second field goal despite Tony Pollard's 129 yards and three touchdowns. Buffalo was on bye. Pittsburgh beat New Orleans in Paris, and that was the week."
+   "tag": "Jon · Four games, and three of them are fights",
+   "text": "Buffalo against Mark is the headline, but it does not stop there. Cleveland at Pittsburgh is Patrick against him with sole possession of the AFC North on it — both 5-2, both 5-2 against the spread, and the Browns already won the first meeting. Kansas City at Denver is Anthony, with first place in the AFC West on the line and the Chiefs coming off a game in which they never reached the red zone. Tennessee at Cincinnati is Bill, and the Titans are ten-and-a-half-point underdogs. Nobody has a harder week."
   },
   {
-   "tag": "The pack · Five points, six owners",
-   "text": "Second through seventh now covers five points. Patrick is up to fourteen on Cleveland and Detroit, who beat Green Bay on a field goal at the whistle after Trey Smack missed twice. Harrison has Minnesota, the last unbeaten team in the league. Brian took Atlanta and Seattle, the two biggest results of the day. Zach beat the Jets with Miami's first win of the season and put 35 on Las Vegas without Davante Adams and on his fourth kicker. Nobody in that group is more than three points from anybody else in it."
+   "owner": "Mark",
+   "tag": "Mark · Three games, one of them Monday",
+   "text": "San Francisco is on bye, so he is down to Baltimore, Las Vegas and Chicago. The Raiders have lost four straight, are giving up 28.1 a game, and go to the Jets in the tightest-priced game of the week. The Bears close everything out on Monday night in Seattle — Caleb Williams has thrown for 300 in each of his last two and Chicago is 5-2 against the spread, the best in the league, against a Seahawks defense that just held Kansas City to three. His lead is two and he is playing a game fewer than Jon."
+  },
+  {
+   "owner": "Zach",
+   "tag": "Zach · A free point, finally",
+   "text": "The Chargers go to the Rams, which means Zach owns both sidelines and banks a point before kickoff — his first of the season. Los Angeles beat Las Vegas 35-21 last week without Davante Adams and on its fourth kicker; the Chargers are the league's only winless team. He also has Green Bay tonight and Miami against New England. Eight points and last, but three games and one of them cannot be lost."
+  },
+  {
+   "tag": "The rest of the pack",
+   "text": "Patrick has four — Carolina tonight, Minnesota at Detroit, Indianapolis at Jacksonville and the Pittsburgh game. Harrison gets the last unbeaten team in the league when Minnesota goes to Detroit, plus New England at Miami and Philadelphia at Washington on Sunday night, where Washington has been bet from three and a half up to five and a half against an Eagles team that has lost five straight without Jalen Hurts. Brian has Jacksonville off a bye, Atlanta at Tampa Bay and Seattle on Monday. Bill, fresh off the sweep, has three."
   }
  ]
 }
