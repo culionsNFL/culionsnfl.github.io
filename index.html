@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CU Lions NFL Wins League">
 <meta name="twitter:description" content="Week 9 up next — Mark leads on 20. Mark 20, Jon 18, Bill 15.5, Harrison 15.5, Patrick 15, Brian 14, Anthony 13, Zach 10.">
 <meta name="twitter:image" content="https://culionsnfl.github.io/preview.png">
-<!-- built 2026-11-03T18:27:36Z -->
+<!-- built 2026-11-03T19:54:31Z -->
 </head>
 <body>
 <title>CU Lions NFL Wins League</title>
@@ -1258,9 +1258,9 @@
    "kick": "2026-11-05 20:15",
    "qbAway": "Trevor Lawrence",
    "qbHome": "Tyler Huntley",
-   "spread": -9.5,
+   "spread": -10.0,
    "stadium": "M&T Bank Stadium",
-   "total": 41.5,
+   "total": 40.5,
    "wk": 9
   },
   {
@@ -1348,7 +1348,7 @@
    "kick": "2026-11-08 13:00",
    "qbAway": "Deshaun Watson",
    "qbHome": "Tyler Shough",
-   "spread": 2.5,
+   "spread": 1.5,
    "stadium": "Caesars Superdome",
    "total": 43.5,
    "wk": 9
@@ -1423,7 +1423,7 @@
    "kick": "2026-11-08 16:25",
    "qbAway": "Jordan Love",
    "qbHome": "Drake Maye",
-   "spread": 2.5,
+   "spread": 3.0,
    "stadium": "Gillette Stadium",
    "total": 46.5,
    "wk": 9
@@ -1728,7 +1728,7 @@
    "w": 2
   }
  },
- "updated": "2026-11-03T18:27:36Z",
+ "updated": "2026-11-03T19:54:31Z",
  "weekly": {
   "Anthony": [
    3.0,
@@ -2635,14 +2635,20 @@
     //
     // Two modes. Mid-week it is a countdown: the games still outstanding.
     // Once a week closes and the next one has not started, fourteen fixtures
-    // is not a headline, so it picks the ones that matter — Thursday always,
-    // then by how much is riding on them.
+    // is not a headline, so it picks the ones that matter: games between
+    // owners sitting close together in the table. A game where one owner
+    // holds both teams is never one of those — the point is banked whoever
+    // wins — so those are filtered out of this section entirely.
     if (todo.length) {
       var oc = document.getElementById("onclock");
       oc.hidden = false;
-      var started = (D.curPlayed || 0) > 0, picks;
+      // A short list is worth printing whole; a long one needs curating, which
+      // is the difference between "what is left" and "what to watch". Keyed on
+      // how many remain rather than on whether the week has started, so a
+      // Thursday result does not turn this into a raw fixture dump.
+      var picks;
 
-      if (started) {
+      if (todo.length <= 4) {
         document.getElementById("oc-label").textContent =
           todo.length === 1 ? "One game left in Week " + todo[0].wk
                             : todo.length + " games left in Week " + todo[0].wk;
@@ -2652,22 +2658,31 @@
           "Week " + todo[0].wk + " · the ones that matter";
         var rankOf = {};
         table.forEach(function (r, i) { rankOf[r.owner] = i + 1; });
-        var opener = todo[0];
-        var ranked = todo.filter(function (g) { return g !== opener; })
-          .map(function (g) {
-            var a = ownerOf[g.away], h = ownerOf[g.home], s = 16 - (rankOf[a] + rankOf[h]);
-            if (a === h) s += 3;                                       // a banked point is news
-            if (a === table[0].owner || h === table[0].owner) s += 4;  // so is the leader
-            if (/\s(2[0-3]):/.test(g.kick || "")) s += 3;              // and so is primetime
-            return { g: g, s: s };
+
+        // Only head-to-heads between different owners are candidates.
+        var cands = todo.filter(function (g) {
+          return ownerOf[g.away] !== ownerOf[g.home];
+        });
+
+        // Ordered by how little separates the two owners in the table, so the
+        // section is about the games that can actually swap positions. Ties go
+        // to the pair higher up the standings, then to kickoff order.
+        var ranked = cands.map(function (g) {
+            var a = ownerOf[g.away], h = ownerOf[g.home];
+            return {
+              g: g,
+              gap: Math.abs(D.points[a] - D.points[h]),
+              high: rankOf[a] + rankOf[h]
+            };
           })
           .sort(function (p, q) {
-            return q.s - p.s || String(p.g.kick).localeCompare(String(q.g.kick));
+            return p.gap - q.gap || p.high - q.high ||
+                   String(p.g.kick).localeCompare(String(q.g.kick));
           });
 
-        // The leader is in every high-scoring game, which would hand back four
-        // rows about one owner. Two appearances each keeps it a week preview
-        // rather than a Mark preview.
+        // The owners at the centre of the scrum appear in several of the
+        // tightest games, which would hand back four rows about one pair.
+        // Two appearances each keeps it a week preview.
         var seen = {};
         function take(g) {
           var a = ownerOf[g.away], h = ownerOf[g.home];
@@ -2678,10 +2693,15 @@
           var a = ownerOf[g.away], h = ownerOf[g.home];
           return (seen[a] || 0) < 2 && (seen[h] || 0) < 2;
         }
-        picks = [opener];
-        take(opener);
+        picks = [];
         ranked.forEach(function (x) {
           if (picks.length < 4 && room(x.g)) { picks.push(x.g); take(x.g); }
+        });
+        // Nothing but same-owner fixtures left: fall back to kickoff order
+        // rather than printing an empty banner.
+        if (!picks.length) picks = todo.slice(0, 4);
+        else picks.sort(function (a, b) {
+          return String(a.kick).localeCompare(String(b.kick));
         });
       }
 
