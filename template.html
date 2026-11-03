@@ -13,6 +13,11 @@
     --hair:     #E2EAF0;
     --accent:   #0B4A78;
     --accent-soft: #E2EEF6;
+    /* The week-by-week slab. Deeper than the paper and cooler than the
+       on-the-clock banner directly under it, so the two stacked blocks at the
+       top of the page read as two things rather than one long tinted box. */
+    --panel:    #DCE7EF;
+    --panel-line: #C6D6E2;
     --warm:     #A8501F;
     --grid:     #E0E8EE;
     /* Columbia blue, used as the banner ground rather than as an accent —
@@ -44,6 +49,8 @@
       --hair:    #1F2831;
       --accent:  #6FB6E8;
       --accent-soft: #14293A;
+      --panel:   #121B23;
+      --panel-line: #243039;
       --warm:    #E08347;
       --grid:    #222C34;
       --band-1:   #123049;
@@ -652,11 +659,15 @@
 
   /* ---------- chart ---------- */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
     border-radius: 3px;
     padding: 18px;
   }
+  /* First block on the page now, so it sits closer to the masthead than the
+     44px a mid-page section gets. */
+  #race-sec { margin-top: 26px; }
+  #race-sec:not([hidden]) + #onclock { margin-top: 34px; }
   .legend {
     display: flex;
     flex-wrap: wrap;
@@ -880,21 +891,6 @@
     </div>
   </header>
 
-  <aside id="onclock" hidden>
-    <p class="oc-label" id="oc-label"></p>
-    <div class="oc-body" id="oc-body"></div>
-  </aside>
-
-  <section id="story-sec" hidden>
-    <canvas id="fx" aria-hidden="true"></canvas>
-    <div class="sec-head">
-      <h2>The story</h2>
-      <span class="sec-note" id="story-note"></span>
-    </div>
-    <p class="standfirst" id="standfirst"></p>
-    <div class="beats" id="beats"></div>
-  </section>
-
   <section id="race-sec" hidden>
     <div class="sec-head">
       <h2>Week by week</h2>
@@ -910,6 +906,21 @@
         </div>
       </details>
     </div>
+  </section>
+
+  <aside id="onclock" hidden>
+    <p class="oc-label" id="oc-label"></p>
+    <div class="oc-body" id="oc-body"></div>
+  </aside>
+
+  <section id="story-sec" hidden>
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <div class="sec-head">
+      <h2>The story</h2>
+      <span class="sec-note" id="story-note"></span>
+    </div>
+    <p class="standfirst" id="standfirst"></p>
+    <div class="beats" id="beats"></div>
   </section>
 
   <section id="standings-sec">
@@ -1768,7 +1779,9 @@
           dot.style.background = COLOR[o];
           side.appendChild(dot);
           side.appendChild(el("b", null, pair[0]));
-          side.appendChild(el("em", null, o));
+          // Owner plus his season total, so "close together in the standings"
+          // is visible in the row rather than something to go and check.
+          side.appendChild(el("em", null, o + " (" + pts(D.points[o]) + ")"));
           row.appendChild(side);
         });
         row.appendChild(el("span", "oc-when", kickLabel(g.kick)));
