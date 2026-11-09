@@ -1,35 +1,36 @@
 {
- "note": "Week 8 final · Week 9 ahead",
- "lede": "Chicago closed Week 8 with a 34-17 win in Seattle and Mark is two clear again on twenty. Below that the table has compressed into a scrum — two and a half points cover third through seventh, Bill and Harrison are dead level, and six of the eight owners have a full four games this week. Baltimore has no quarterback and plays Thursday, the Chargers still have no wins, and Harrison and Zach have been drawn against each other three separate times.",
+ "note": "Week 9 · one to play · Week 10 ahead",
+ "lede": "Mark is three clear on twenty-two after watching his own 49ers put 38 on his own Raiders, which is the kind of week he is having. Behind him the table has never been tighter: half a point separates Jon and Bill in second and third, a single point covers Brian, Harrison and Patrick in fourth through sixth, and Week 10 draws both of those pairs against each other. Buffalo at Minnesota tonight closes Week 9 with Jon's twentieth point on the line, the trade deadline passes Tuesday afternoon, and on Sunday night Pittsburgh goes to Cincinnati with second place in this league attached to it.",
  "beats": [
   {
-   "tag": "Thursday · Jacksonville at Baltimore",
-   "text": "Brian against Mark, and the Ravens have nobody to play quarterback. Lamar Jackson is on injured reserve and needs surgery on the thumb he hurt on his only snap against Buffalo; Tyler Huntley is doubtful with turf toe. That leaves Joe Fagnano, an undrafted rookie who went 10-of-21 for 91 in relief on Sunday, took a low hit on the ankle, and was limited in Monday's walkthrough. Baltimore has lost three straight, is 0-3 against the spread at home, and is a nine-point home underdog to a Jacksonville side that ranks top five on both sides of the ball."
+   "owner": "Jon",
+   "tag": "Tonight · Buffalo at Minnesota",
+   "text": "Jon against Harrison, the last game of Week 9, and both teams are 6-1. Minnesota is without Kyler Murray, who strained a hamstring and has been pointed toward a return next week, so Carson Wentz takes it against a Buffalo side with the highest-scoring offense in football at 33.3 a game. Josh Allen has eleven touchdown passes and nine more on the ground. A Buffalo win puts Jon on twenty and a point and a half clear of Bill; a Minnesota win lifts Harrison past Brian into fourth."
   },
   {
    "owner": "Bill",
-   "tag": "Bill and Harrison · Level on 15.5",
-   "text": "Bill's sweep and Harrison's steady two a week have left them tied for third, four and a half back. Bill has the week's widest spread of opponents — Cincinnati against Brian in Madrid at half past nine in the morning, Dallas at Indianapolis against Patrick, the Giants at Philadelphia against Anthony, and Tampa Bay at Chicago on Sunday night against Mark. Harrison drew Zach three times and Jon once, which is as close to a controlled experiment as this league gets."
+   "tag": "Sunday night · Pittsburgh at Cincinnati",
+   "text": "Jon at Bill, and the schedule could not have drawn it better. Both teams are 6-2, both have won four straight, they are tied at the top of the AFC North, and their owners are half a point apart in second and third. Pittsburgh won the first meeting 30-27 in Week 3 and holds the tiebreak. Joe Burrow has 23 touchdowns against six interceptions and has thrown three or more in four consecutive games; Aaron Rodgers has thirteen and six, with T.J. Watt on eight sacks. Cincinnati by three and a half."
   },
   {
-   "owner": "Patrick",
-   "tag": "Patrick and Brian · A point apart",
-   "text": "Patrick is on fifteen after Detroit ended Minnesota's unbeaten run 19-15 on 230 rushing yards, though Cleveland's five-and-one surge died in a 27-6 loss at Pittsburgh with Deshaun Watson sacked eight times. Brian is on fourteen and has Jacksonville, which is 5-2 and three games clear in the AFC South, plus Atlanta — shut out 16-0 by a Tampa Bay side that did not complete a single forward pass. Four games each, and they play each other in New Orleans."
+   "owner": "Harrison",
+   "tag": "Harrison and Patrick · Half a point, and they meet twice",
+   "text": "Sixteen and a half against sixteen, and two of the four games each man has are against the other. New England goes to Detroit in Munich at half past nine Sunday morning, where the Lions have won four in a row and Drake Maye is carrying eleven interceptions to Jared Goff's two. Then Houston at Cleveland, where the Texans lead the league with 29 sacks and the Browns have not named a quarterback since Shedeur Sanders started at New Orleans with Deshaun Watson in concussion protocol. Harrison also has Washington on Thursday and Minnesota at Green Bay."
+  },
+  {
+   "owner": "Brian",
+   "tag": "Brian · Four games, and three of them are fights",
+   "text": "Seventeen points and fourth, with the busiest slate in the league outside the byes. Jacksonville is 6-2 and goes to Tennessee having won the last five in that series — that one is straight against Jon, as is Kansas City at Atlanta. New Orleans hosts Carolina against Patrick, two 3-5 teams tied at the bottom of the NFC South and the tightest line on the board. Seattle at Las Vegas is against Mark, with both quarterback rooms a question: Sam Darnold is a long shot on a quad and ribs and Drew Lock has an issue of his own."
   },
   {
    "owner": "Anthony",
-   "tag": "Anthony · Denver has the West",
-   "text": "The Broncos are 6-2 and first in the division after scoring fifteen unanswered in the fourth to beat Kansas City, ending it with Malcolm Roach sacking Patrick Mahomes on fourth down from the six. Arizona came from 17-3 down to win in overtime after benching Jacoby Brissett at halftime — Gardner Minshew starts from here. Anthony is on thirteen with four games, including the Jets against Jon's Chiefs and Philadelphia, where the Eagles have lost six straight without Jalen Hurts."
+   "tag": "Anthony · Two games, and the wrong two",
+   "text": "Both byes in the league this week are his, and they are the wrong halves of his roster. Denver sits at 7-2 on a five-game winning streak after a fifth fourth-quarter comeback of the season in Carolina, and Philadelphia sits too — which at least stops the bleeding at seven straight losses. That leaves him the Jets, 2-7 and beaten four in a row, hosting Buffalo; and Arizona, 3-6 and held to three points in Seattle, hosting a Rams side that has won three straight. He is on fourteen, and a quiet week here could be expensive."
   },
   {
    "owner": "Zach",
-   "tag": "Zach · Three cracks at Harrison",
-   "text": "Ten points and last, but the schedule has handed him something: the Chargers host Houston, the Rams go to Washington and Green Bay goes to New England, so three of his four games are directly against Harrison. The problem is that the Chargers are 0-7, rank last in scoring, lead the league in turnovers and have not scored a touchdown since the third quarter of Week 5. The Rams and Packers are the ones that have to deliver."
-  },
-  {
-   "owner": "Jon",
-   "tag": "The byes · Two teams, one owner",
-   "text": "Pittsburgh and Tennessee are the only two teams on bye in the entire league this week, and Jon owns both. That leaves him Kansas City on Sunday and Buffalo at Minnesota on Monday night — two games against six for most of the field. Mark has three, one of which is Las Vegas at San Francisco, where he owns both sidelines and banks a point before kickoff."
+   "tag": "Zach · Monday night, and still nothing from the Chargers",
+   "text": "Twelve points and last, and the problem is unchanged: Los Angeles is 0-8, the only winless team left, scoring 14.1 a game with Justin Herbert on ten interceptions, and they went twelve straight quarters without an offensive touchdown before Houston put 44 on them. They close Week 10 in Baltimore against Mark on Monday night, where the Ravens are 4-5, have lost four in a row and are starting Jacoby Brissett with Lamar Jackson on injured reserve. If the Chargers are ever going to win one, that is the spot."
   }
  ]
 }
