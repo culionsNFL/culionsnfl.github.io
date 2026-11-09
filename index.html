@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CU Lions NFL Wins League">
 <meta name="twitter:description" content="Week 9, 14 of 15 played — Mark leads on 22. Mark 22, Jon 19, Bill 18.5, Brian 17, Harrison 16.5, Patrick 16, Anthony 14, Zach 12.">
 <meta name="twitter:image" content="https://culionsnfl.github.io/preview.png">
-<!-- built 2026-11-09T15:42:29Z -->
+<!-- built 2026-11-09T19:26:21Z -->
 </head>
 <body>
 <title>CU Lions NFL Wins League</title>
@@ -793,6 +793,48 @@
   }
   th.tot { color: var(--ink); }
   tbody td.tot { font-size: 14px; }
+  /* Each owner's four franchises beside his name. A weekly number means more
+     when you can see which teams were meant to produce it, without going down
+     to the standings to look the roster up. inline-block rather than flex on
+     the cell itself: a td set to flex stops being a table cell, and the column
+     widths stop agreeing with the header. */
+  td.ownr .nm { display: inline-block; }
+  td.ownr .tms {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: .02em;
+    text-transform: none;
+    color: var(--muted);
+  }
+  /* Abbreviation identifies, record informs: the record sits a shade back so
+     the eye still lands on the team first. */
+  td.ownr .tms i { font-style: normal; color: var(--ink-2); }
+  td.ownr .tms i b { font-weight: 400; color: var(--muted); }
+  td.ownr .tms i + i::before { content: " · "; color: var(--line); }
+  /* On a phone the roster drops under the name instead of doubling the column
+     width, and is allowed to wrap rather than run off the side. */
+  @media (max-width: 560px) {
+    td.ownr { padding-top: 7px; padding-bottom: 7px; white-space: normal; }
+    /* Two by two rather than a four-line column: the rosters would otherwise
+       make every row five lines tall and turn the table into a scroll. */
+    td.ownr .tms {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      justify-content: start;
+      gap: 1px 12px;
+      margin-left: 0;
+      margin-top: 3px;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+    /* Each team and its record is one unbreakable unit, or "BAL" and "4-5"
+       end up on separate lines. */
+    td.ownr .tms i { white-space: nowrap; }
+    td.ownr .tms i + i::before { content: none; }
+    td.ownr .nm { white-space: nowrap; }
+  }
 
   /* ---------- slate ---------- */
   .slate { display: grid; gap: 0; }
@@ -1493,9 +1535,9 @@
    "kick": "2026-11-09 20:15",
    "qbAway": "Josh Allen",
    "qbHome": "Kyler Murray",
-   "spread": -3.0,
+   "spread": -3.5,
    "stadium": "U.S. Bank Stadium",
-   "total": 44.5,
+   "total": 45.5,
    "wk": 9
   }
  ],
@@ -1760,7 +1802,7 @@
    "w": 2
   }
  },
- "updated": "2026-11-09T15:42:29Z",
+ "updated": "2026-11-09T19:26:21Z",
  "weekly": {
   "Anthony": [
    3.0,
@@ -2390,10 +2432,10 @@
   var PW = played, partial = PW > TW;
   if (PW >= 2) {
     document.getElementById("race-sec").hidden = false;
-    if (partial) {
-      document.getElementById("race-note").textContent =
-        "Points scored each week · Week " + PW + " still in progress";
-    }
+    document.getElementById("race-note").textContent =
+      (PW > 4 ? "The last four weeks · full season in the chart below"
+              : "Points scored each week, and the running total") +
+      (partial ? " · Week " + PW + " still in progress" : "");
 
     var lg = document.getElementById("legend");
     table.forEach(function (r) {
@@ -2563,15 +2605,32 @@
     var thead = el("thead"), hr = el("tr");
     hr.appendChild(el("th", null, "Owner"));
     hr.appendChild(el("th", "tot", "Total"));
-    for (var k = PW; k >= 1; k--) hr.appendChild(el("th", null, "W" + k + (partial && k === PW ? "*" : "")));
+    /* Only the recent weeks get a column. By November the full run is a dozen
+       columns of mostly 2s that nobody reads, and it pushes Total off a phone
+       screen; the whole season is still in the line chart below. */
+    var SHOW = 4, FIRST = Math.max(1, PW - SHOW + 1);
+    for (var k = PW; k >= FIRST; k--) hr.appendChild(el("th", null, "W" + k + (partial && k === PW ? "*" : "")));
     thead.appendChild(hr); t.appendChild(thead);
     var tb = el("tbody");
     table.forEach(function (r) {
       var tr = el("tr");
-      tr.appendChild(el("td", null, r.owner));
+      var who = el("td", "ownr");
+      who.appendChild(el("span", "nm", r.owner));
+      var tms = el("span", "tms");
+      (D.rosters[r.owner] || []).forEach(function (tm) {
+        var i = el("i", null, tm);
+        var rec = (D.teams || {})[tm];
+        if (rec) {
+          i.appendChild(el("b", null,
+            " " + rec.w + "-" + rec.l + (rec.t ? "-" + rec.t : "")));
+        }
+        tms.appendChild(i);
+      });
+      who.appendChild(tms);
+      tr.appendChild(who);
       tr.appendChild(el("td", "tot", pts(r.p)));
       var wk = (D.weekly[r.owner] || []).slice(0, PW);
-      for (var j = wk.length - 1; j >= 0; j--) tr.appendChild(el("td", null, pts(wk[j])));
+      for (var j = wk.length - 1; j >= FIRST - 1; j--) tr.appendChild(el("td", null, pts(wk[j])));
       tb.appendChild(tr);
     });
     t.appendChild(tb);
